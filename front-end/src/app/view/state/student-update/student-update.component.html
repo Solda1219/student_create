@@ -1,0 +1,131 @@
+<div class= "row createForm mt-4">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <strong>Student</strong> edit
+      </div>
+      <div class="card-body">
+        <form [formGroup]="formGroup" #myform="ngForm" (ngSubmit)="update()">
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="name">Name</label>
+            <div class="col-md-9">
+              <input class="form-control" id="name" type="text" name="name" placeholder="Name"
+                formControlName="name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="school">School</label>
+            <div class="col-md-9">
+              <input class="form-control" id="school" type="text" name="school" placeholder="School" formControlName="school">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="branch">Branch</label>
+            <div class="col-md-9">
+              <input class="form-control" id="branch" type="text" name="branch" placeholder="branch" formControlName="branch">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="governorate">Governorate</label>
+            <div class="col-md-9">
+              <input class="form-control" id="governorate" type="text" name="governorate" placeholder="governorate" formControlName="governorate">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="institute">Institute</label>
+            <div class="col-md-9">
+              <input class="form-control" id="institute" type="text" name="institute" placeholder="institute" formControlName="institute">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="phone">Phone</label>
+            <div class="col-md-9">
+              <input class="form-control" id="phone" type="text" name="phone" placeholder="phone" formControlName="phone">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="wipStatus">Poster</label>
+            <div class="col-md-9">
+              <select id="poster" name="poster" class="form-control" formControlName= "poster">
+                <option value="Gold Poster">Gold Poster</option>
+                <option value="Green Poster">Green Poster</option>
+                <option value="Red Poster">Red Poster</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="code">Code</label>
+            <div class="col-md-9">
+              <input class="form-control" id="code" type="text" name="code" placeholder="code" formControlName="code">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="confirmCode">Code Confirm</label>
+            <div class="col-md-9">
+              <input class="form-control" id="confirmCode" type="text" name="confirmCode" placeholder="confirmCode" formControlName="confirmCode">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="identification">ID</label>
+            <div class="col-md-9">
+              <input class="form-control" id="identification" type="text" name="identification" placeholder="identification" formControlName="identification">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="firstInstallment">First Installment</label>
+            <div class="col-md-9">
+              <input class="form-control" id="firstInstallment" type="number" name="firstInstallment" placeholder="firstInstallment" formControlName="firstInstallment">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="secondInstallment">Second Installment</label>
+            <div class="col-md-9">
+              <input class="form-control" id="secondInstallment" type="number" name="secondInstallment"
+                placeholder="secondInstallment" formControlName="secondInstallment">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="thirdInstallment">Third Installment</label>
+            <div class="col-md-9">
+              <input class="form-control" id="thirdInstallment" type="number" name="thirdInstallment"
+                placeholder="thirdInstallment" formControlName="thirdInstallment">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="forthInstallment">Forth Installment</label>
+            <div class="col-md-9">
+              <input class="form-control" id="forthInstallment" type="number" name="forthInstallment"
+                placeholder="forthInstallment" formControlName="forthInstallment">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="remaining">Remain Amount</label>
+            <div class="col-md-9">
+              <input class="form-control" id="remaining" type="number" name="remaining"
+                placeholder="remaining" formControlName="remaining">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="totalAmount">Total Amount</label>
+            <div class="col-md-9">
+              <input class="form-control" id="totalAmount" type="number" name="totalAmount"
+                placeholder="totalAmount" formControlName="totalAmount">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="notes">Notes</label>
+            <div class="col-md-9">
+              <textarea id="notes" name="notes" rows="5" class="form-control"
+                placeholder="Note.." formControlName= "notes"></textarea>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Update</button>
+            <button type="reset" class="btn btn-sm btn-danger" (click)= "gotoStateContent()"><i class="fa fa-ban"></i> Cancel</button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>

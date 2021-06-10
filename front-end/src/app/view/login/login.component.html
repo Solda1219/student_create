@@ -1,0 +1,28 @@
+<div class="login-bg" style="background-image: url('assets/img/mainImg.jpg'); height:100vh;">
+  <div class="login-layer">
+    <div class="loginStyle1">
+      <form [formGroup]="formGroup" #myform="ngForm" (ngSubmit)="login()">
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="icon-user"></i></span>
+          </div>
+          <input type="text" class="form-control" placeholder="{{ cf.translate('email') }}" formControlName="username">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="icon-lock"></i></span>
+          </div>
+          <input type="password" class="form-control" placeholder="{{ cf.translate('password') }}" formControlName="password">
+        </div>
+        
+        <div class="row">
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary px-4 loginButton">create</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+</div>

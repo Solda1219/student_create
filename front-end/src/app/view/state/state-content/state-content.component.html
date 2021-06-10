@@ -1,0 +1,123 @@
+<div class= 'mt-4 ml-1'>
+  <div class= 'row'>
+    <div class="col-sm-3 col-6 col-md-3">
+      <button type="button" (click)="navigateCreate()" class="btn btn-block btn-primary">Create</button>
+    </div>
+    <mat-form-field class= 'col-md-8 col-6'>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    </mat-form-field>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell *matCellDef="let row" (click)= "edit(row.id)"> {{row.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="equipmentId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Equipment Id </th>
+        <td mat-cell *matCellDef="let row" (click)= "edit(row.id)"> {{row.equipmentId}} </td>
+      </ng-container> -->
+      <ng-container matColumnDef="name" (click)= "edit(row.id)">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let row" (click)= "edit(row.id)"> {{row.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="school" (click)= "edit(row.id)">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> School </th>
+        <td mat-cell *matCellDef="let row" (click)= "edit(row.id)"> {{row.school}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="branch">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Branch </th>
+        <td mat-cell *matCellDef="let row" (click)= "edit(row.id)"> {{row.branch}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="governorate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Governorate </th>
+        <td mat-cell *matCellDef="let row" (click)= "edit(row.id)"> {{row.governorate}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="institute">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Institute </th>
+        <td mat-cell *matCellDef="let row"> {{row.institute}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+        <td mat-cell *matCellDef="let row" (click)= "edit(row.id)"> {{row.phone}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="poster">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Poster </th>
+        <td mat-cell *matCellDef="let row" (click)= "edit(row.id)"> {{row.poster}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
+        <td mat-cell *matCellDef="let row" (click)= "edit(row.id)"> {{row.code}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="identification">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
+        <td mat-cell *matCellDef="let row" (click)= "edit(row.id)"> {{row.identification}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="total_amount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Amount </th>
+        <td mat-cell *matCellDef="let row" (click)= "edit(row.id)"> {{row.total_amount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="first_installment">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> First Installment </th>
+        <td mat-cell *matCellDef="let row" (click)= "edit(row.id)"> {{row.first_installment}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="second_installment">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Second Installment </th>
+        <td mat-cell *matCellDef="let row" (click)="edit(row.id)"> {{row.second_installment}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="third_installment">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Third Installment </th>
+        <td mat-cell *matCellDef="let row" (click)="edit(row.id)"> {{row.third_installment}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="forth_installment">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Forth Installment </th>
+        <td mat-cell *matCellDef="let row" (click)="edit(row.id)"> {{row.forth_installment}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="remain_amount">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Remain Amount </th>
+        <td mat-cell *matCellDef="let row" (click)="edit(row.id)"> {{row.remain_amount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="notes">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Notes </th>
+        <td mat-cell *matCellDef="let row" (click)="edit(row.id)"> {{row.notes}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef= "action">
+        <th mat-header-cel *matHeaderCellDef mat-sort-header> Action </th>
+        <td mat-cell *matCellDef="let row" >
+          <button type="button" (click)= "deleteStudent(row.id)" class="btn btn-block btn-danger" >Delete</button>
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row example-element-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>

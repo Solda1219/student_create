@@ -1,0 +1,37 @@
+<app-header
+  [navbarBrandRouterLink]="['/dashboard']"
+  [fixed]="true"
+  [sidebarToggler]="'lg'"
+  [asideMenuToggler]="false"
+ >
+  <ul class="nav navbar-nav ml-auto d-md-down-none">
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+      <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false" style="cursor: pointer;padding-right: 5px;">
+        <img class="img-avatar" src="assets/img/icon/Icon_Profile.png"/>{{user.name}}
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+        <div class="divider"></div>
+        <!-- <a class="dropdown-item"><i class="fa fa-shield"></i> Lock account</a> -->
+        <a class="dropdown-item" (click)="logOut()"><i class="fa fa-lock"></i> {{'Log out'|translate}}</a>
+      </div>
+    </li>
+
+  </ul>
+</app-header>
+<div class="app-body">
+  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
+    <app-sidebar-nav [navItems]="nav" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
+    <app-sidebar-minimizer></app-sidebar-minimizer>
+  </app-sidebar>
+  <!-- Main content -->
+  <main class="main">
+    <div class="container-fluid" style="padding:0px">
+      <router-outlet></router-outlet>
+    </div><!-- /.container-fluid -->
+  </main>
+
+</div>
+<app-footer>
+  <span><a href="">Student center</a> &copy; 2021</span>
+  <span class="ml-auto">Manufactured by <a href="">Our team</a></span>
+</app-footer>

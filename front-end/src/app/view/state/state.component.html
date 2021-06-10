@@ -1,0 +1,58 @@
+<div class= "m-5, p-5">
+    <button type="button" class="btn btn-pill btn-block btn-primary" style= "width: 100px" data-toggle="modal" (click)="stateCreateModal.show()"><i class="fa fa-plus"></i> State</button>
+
+    <div class="row mt-4">
+        <div *ngFor="let state of states; let i = index" (click)= "stateContent(state.id)" class="col-sm-6 col-md-3" style= "cursor: pointer">
+            <div class="card text-white bg-info">
+                <div class="card-body">
+                    <div class= "row">
+                        <div class="h3 text-muted text-left mb-4 col-md-9">
+                            {{state.state_name}}
+                        </div>
+                        <div class="h1 text-muted text-right mb-4 col-md-3">
+                            <i class="icon-people"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="h4 mb-0">{{state.student_count}}</div>
+                    <small class="text-muted text-uppercase font-weight-bold">students</small>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div bsModal #stateCreateModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">New State</h4>
+                <button type="button" class="close" (click)="stateCreateModal.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formGroup" #myform="ngForm" (submit)="createState()">
+                    <div class="input-group mb-3">
+                        
+                        <input type="text" [class]="myform.submitted&&formGroup.get('name').invalid?'form-control form-error':'form-control'" placeholder="name" formControlName="name">
+                    </div>
+                    <div class="input-group mb-3">
+                        
+                        <input type="text" [class]="myform.submitted&&formGroup.get('governorate').invalid?'form-control form-error':'form-control'" placeholder="governorate"
+                            formControlName="governorate">
+                    </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="stateCreateModal.hide()">Close</button>
+                    <button type="submit" class="btn btn-primarny">Create</button>
+                </div>
+                </form>
+            </div>
+            
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!--/.row-->
