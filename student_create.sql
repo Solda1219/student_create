@@ -31,7 +31,7 @@ CREATE TABLE `states` (
 /*Data for the table `states` */
 
 insert  into `states`(`id`,`state_name`,`governorate`,`students`) values 
-(1,'asdf','asdf','[3,4,6,7,8,9]'),
+(1,'asdf','asdf','[3,4,6,7,8,9,10,11,12,13,14,15,16,17,18]'),
 (2,'asdfs','asdfs','[5]'),
 (3,'asds','sdsd','[]'),
 (4,'sdss','sss','[]'),
@@ -65,18 +65,26 @@ CREATE TABLE `students` (
   `forth_installment` int(11) DEFAULT NULL,
   `remain_amount` int(11) DEFAULT NULL,
   `notes` longtext DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `students` */
 
-insert  into `students`(`id`,`state_id`,`name`,`school`,`branch`,`governorate`,`institute`,`phone`,`poster`,`code`,`identification`,`total_amount`,`first_installment`,`second_installment`,`third_installment`,`forth_installment`,`remain_amount`,`notes`) values 
-(1,1,'asdf','asdf','asdf','asdf','asdfasfd','asdf','Gold Poster','asdf','asdf',0,0,0,0,0,0,''),
-(2,1,'asdfss','asdfsdf','sdfsdf','sdfsdf','sdfsdf','asdfsdf','Green Poster','asdfasdf','asfd',0,0,0,0,0,0,''),
-(5,2,'asdfsdfasdfa','asdfsdfsdfsdf','sdfsdfsdf','sdfsdfsdf','sdfsdfsdf','123123123123','Green Poster','asdfasfd','asdfasdfsdf',0,0,0,0,0,0,''),
-(7,1,'student in 1','university','geometry','boss','asdfsfd','12312312','Gold Poster','asdf','asdfasdf',23,22,12,1,23,23,''),
-(8,1,'studaesdf','moskow','physics','asdfas','asdfasdf','12121232','Green Poster','asf','asdfasdf',23,23,23,0,0,0,'asdf'),
-(9,1,'asfdasfdsdfsdf','sdfsdfsdfsdf','sdfsdfsfdsf','sdfsdfsdfs','sdfsfsf','12123232','','asdfasdf','asdfasdf',0,0,0,0,0,0,'');
+insert  into `students`(`id`,`state_id`,`name`,`school`,`branch`,`governorate`,`institute`,`phone`,`poster`,`code`,`identification`,`total_amount`,`first_installment`,`second_installment`,`third_installment`,`forth_installment`,`remain_amount`,`notes`,`created_at`) values 
+(1,1,'asdf','asdf','asdf','asdf','asdfasfd','asdf','Gold Poster','asdf','asdf',0,0,0,0,0,0,'',NULL),
+(2,1,'asdfss','asdfsdf','sdfsdf','sdfsdf','sdfsdf','asdfsdf','Green Poster','asdfasdf','asfd',0,0,0,0,0,0,'',NULL),
+(5,2,'asdfsdfasdfa','asdfsdfsdfsdf','sdfsdfsdf','sdfsdfsdf','sdfsdfsdf','123123123123','Green Poster','asdfasfd','asdfasdfsdf',0,0,0,0,0,0,'',NULL),
+(8,1,'edited','edited','physics','asdfas','asdfasdf','12121232','Green Poster','asf','asdfasdf',233,23,23,0,0,187,'asdf',NULL),
+(9,1,'asfdasfdsdfsdf','sdfsdfsdfsdf','sdfsdfsfdsf','sdfsdfsdfs','sdfsfsf','12123232','','asdfasdf','asdfasdf',0,0,0,0,0,0,'',NULL),
+(11,1,'datedasdf','asdfdasd','sadf23','asdfsadf','asdfsadf','1231232','','','',0,0,0,121,0,0,'','2021-06-12'),
+(12,1,'asdfsfd','remain_correct?','asdfasfd','asdfsfd','asdfasfd','','','','',123,12,10,0,0,NULL,'','2021-06-12'),
+(13,1,'remain_corr','dfdfd','asdf','asdf','asdf','','','','',123,12,0,23,0,NULL,'','2021-06-12'),
+(14,1,'asdfasf','sreee','sdfsdf','sdf','sfdsdf','','','','',123,22,11,0,3,NULL,'','2021-06-12'),
+(15,1,'asfdasfd','asdfasfd','asdfsfd','asfsadf','asfasdf','','','','',122,2,2,0,0,NULL,'','2021-06-12'),
+(16,1,'sadfsdf','asdfsadf','asdfsdf','asdfsadf','asdfasdf','','','','',1230,12,21,0,1,NULL,'','2021-06-12'),
+(17,1,'asdfasdf','sdfsdf','sdfsdf','sdfsdf','sdfsdf','','','','',0,0,0,0,0,0,'','2021-06-12'),
+(18,1,'asdfasdfsdfsf','sdfsdf','ssdfsdfdf','sdfsdf','sdfsdf','','','','',123,22,12,0,0,89,'','2021-06-12');
 
 /*Table structure for table `user` */
 
