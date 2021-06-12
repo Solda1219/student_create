@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class StudentCreateComponent implements OnInit {
   stateId = 0;
   loading;
-
+  moneyValid = true;
   formGroup: FormGroup;
   constructor(
     public cf: CommonFunctionService,
@@ -52,7 +52,16 @@ export class StudentCreateComponent implements OnInit {
       this.userService.errorMessage("Please input all input field!");
       return;
     }
-    const studentData= this.formGroup.value;
+
+    if (this.formGroup.value.remaining < 0 || this.formGroup.value.totalAmount < this.formGroup.value.firstInstallment+this.formGroup.value.secondInstallment+this.formGroup.value.thirdInstallment+ this.formGroup.value.forthInstallment) {
+      this.moneyValid = false;
+      this.userService.errorMessage("Total money must be same with first + second + third + forth installment + remain amount!");
+      return;
+    }
+    let remaining_amount = this.formGroup.value.totalAmount - this.formGroup.value.firstInstallment - this.formGroup.value.secondInstallment - this.formGroup.value.thirdInstallment - this.formGroup.value.forthInstallment;
+    console.log(remaining_amount);
+    this.formGroup.patchValue({ remaining: remaining_amount });
+    const studentData = this.formGroup.value;
     console.log('studentData in create', studentData);
     this.userService.postRequest('_api/student/create', studentData, true).subscribe(
       res => {

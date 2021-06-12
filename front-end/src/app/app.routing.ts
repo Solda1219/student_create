@@ -61,6 +61,10 @@ export const routes: Routes = [
         path: 'state',
         loadChildren: () => import('./view/state/state.module').then(m => m.StateModule)
       },
+      {
+        path: 'report',
+        loadChildren:()=> import('./view/report/report.module').then(m=>m.ReportModule)
+      }
     ]
   },
   { path: '**', component: P404Component }

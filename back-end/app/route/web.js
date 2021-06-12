@@ -44,4 +44,5 @@ router.post('/student/update', [requireAuth], studentController.updateStudent);
 router.get('/students/get/:stateId', [requireAuth], studentController.getBystate);
 router.get('/student/:studentId', [requireAuth], studentController.getById);
 router.get('/student/delete/:studentId', [requireAuth], studentController.deleteStudent);
+router.get('/students/getAll', [requireAuth], studentController.getAllStudent);
 module.exports = router

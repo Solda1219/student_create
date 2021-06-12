@@ -72,44 +72,45 @@
             </div>
           </div>
           <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="totalAmount">Total Amount</label>
+            <div class="col-md-9">
+              <input [class]="moneyValid?'form-control':'form-control form-error'" id="firstInstallment" id="totalAmount"
+                type="number" name="totalAmount" placeholder="totalAmount" formControlName="totalAmount">
+            </div>
+          </div>
+          <div class="form-group row">
             <label class="col-md-3 col-form-label" for="firstInstallment">First Installment</label>
             <div class="col-md-9">
-              <input class="form-control" id="firstInstallment" type="number" name="firstInstallment" placeholder="firstInstallment" formControlName="firstInstallment">
+              <input [class]="moneyValid?'form-control':'form-control form-error'" id="firstInstallment" type="number"
+                name="firstInstallment" placeholder="firstInstallment" formControlName="firstInstallment">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-3 col-form-label" for="secondInstallment">Second Installment</label>
             <div class="col-md-9">
-              <input class="form-control" id="secondInstallment" type="number" name="secondInstallment"
-                placeholder="secondInstallment" formControlName="secondInstallment">
+              <input [class]="moneyValid?'form-control':'form-control form-error'" id="secondInstallment" type="number"
+                name="secondInstallment" placeholder="secondInstallment" formControlName="secondInstallment">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-3 col-form-label" for="thirdInstallment">Third Installment</label>
             <div class="col-md-9">
-              <input class="form-control" id="thirdInstallment" type="number" name="thirdInstallment"
-                placeholder="thirdInstallment" formControlName="thirdInstallment">
+              <input [class]="moneyValid?'form-control':'form-control form-error'" id="thirdInstallment" type="number"
+                name="thirdInstallment" placeholder="thirdInstallment" formControlName="thirdInstallment">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-3 col-form-label" for="forthInstallment">Forth Installment</label>
             <div class="col-md-9">
-              <input class="form-control" id="forthInstallment" type="number" name="forthInstallment"
-                placeholder="forthInstallment" formControlName="forthInstallment">
+              <input [class]="moneyValid?'form-control':'form-control form-error'" id="forthInstallment" type="number"
+                name="forthInstallment" placeholder="forthInstallment" formControlName="forthInstallment">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-3 col-form-label" for="remaining">Remain Amount</label>
             <div class="col-md-9">
-              <input class="form-control" id="remaining" type="number" name="remaining"
-                placeholder="remaining" formControlName="remaining">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="totalAmount">Total Amount</label>
-            <div class="col-md-9">
-              <input class="form-control" id="totalAmount" type="number" name="totalAmount"
-                placeholder="totalAmount" formControlName="totalAmount">
+              <input disabled [class]="moneyValid?'form-control':'form-control form-error'" id="remaining" type="number"
+                name="remaining" placeholder="remaining" formControlName="remaining">
             </div>
           </div>
           <div class="form-group row">

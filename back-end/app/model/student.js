@@ -10,6 +10,16 @@ let createStudent = async (data) => {
     }
 }
 
+let getAllStudent = async () => {
+    try {
+        const students = await query.get(studenttable, '*', `WHERE id> 0`);
+        return students;
+    }
+    catch (err) {
+        return false
+    }
+}
+
 let getStudentsByIds = async (ids) => {
     let students = [];
     try {
@@ -47,6 +57,7 @@ let updateStudent = async (data) => {
         return true
     }
     catch (err) {
+        console.log(err)
         return false;
     }
 }
@@ -67,5 +78,6 @@ module.exports = {
     getStudentsByIds,
     getById,
     updateStudent,
-    deleteStudent
+    deleteStudent,
+    getAllStudent
 }

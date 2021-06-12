@@ -41,4 +41,11 @@ export const navItems = [
     role:-1,
 
   },
+  {
+    name: 'Report',
+    icon: 'cil-triangle',
+    url: '/report',
+    role:-1,
+
+  },
 ];
