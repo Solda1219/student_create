@@ -1,12 +1,14 @@
 import { UserService } from '../../service/user.service';
 
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 
 /**
@@ -212,5 +214,64 @@ export class ReportComponent implements AfterViewInit, OnInit {
     let maxRemain = parseInt(event.target.value.trim());
     this.reportFilterData = { ...this.reportFilterData, maxRemain: maxRemain };
     this.applyFilter();
+  }
+  public download():void {
+    let data = document.getElementById('pdfData');
+        
+    html2canvas(data).then(canvas => {
+        
+        // let fileWidth = 1720;
+        // let fileHeight = canvas.height * fileWidth / canvas.width;
+        
+        // const FILEURI = canvas.toDataURL('image/png')
+        // let PDF = new jsPDF('l', 'pt', [canvas.width, canvas.height]);
+        // let position = 0;
+        // PDF.addImage(FILEURI, 'PNG', 0, position, canvas.width, canvas.height)
+        
+        // PDF.save('angular-demo.pdf');
+      const contentDataURL = canvas.toDataURL('image/png', 0.00005)  
+      // var imgWidth = 200; 
+      // var pageHeight = 295;
+      var imgWidth = canvas.width; 
+      var pageHeight = canvas.height;  
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+    
+      var doc = new jsPDF('l', 'mm', 'a4');
+      var position = 0;
+    
+      doc.addImage(contentDataURL, 'PNG', 10, position, Math.floor(imgWidth * 0.2648), Math.floor(pageHeight * 0.2648));
+    
+      heightLeft -= pageHeight;
+    
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        doc.addPage();
+        doc.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+      doc.save( 'file.pdf');
+    });     
+  //   var fbcanvas = document.getElementById('pdfData');
+  //  html2canvas(fbcanvas=>
+  //       {
+
+  //           onrendered: function (canvas) {
+
+  //               var width = canvas.width;
+  //               var height = canvas.height;
+  //               var millimeters = {};
+  //               millimeters.width = Math.floor(width * 0.264583);
+  //               millimeters.height = Math.floor(height * 0.264583);
+
+  //               var imgData = canvas.toDataURL(
+  //                   'image/png');
+  //               var doc = new jsPDF("p", "mm", "a4");
+  //               doc.deletePage(1);
+  //               doc.addPage(millimeters.width, millimeters.height);
+  //               doc.addImage(imgData, 'PNG', 0, 0);
+  //               doc.save('WebSiteScreen.pdf');
+  //           }
+  //       });
   }
 }
