@@ -24,6 +24,12 @@ export class ReportComponent implements AfterViewInit, OnInit {
   });
   totalData = [];
   states = [];
+  totalSum = 0;
+  firstSum = 0;
+  secondSum = 0;
+  thirdSum = 0;
+  forthSum = 0;
+  remainSum = 0;
   reportFilterData = {
     minDate: 0,
     maxDate: 100000000000000,
@@ -62,6 +68,36 @@ export class ReportComponent implements AfterViewInit, OnInit {
     this.dataSource = new MatTableDataSource([]);
     
   }
+  setSum() {
+    this.totalSum = 0;
+    this.firstSum = 0;
+    this.secondSum = 0;
+    this.thirdSum = 0;
+    this.forthSum = 0;
+    this.remainSum = 0;
+    for (let i = 0; i < this.dataSource.data.length; i++){
+      if (this.dataSource.data[i]['total_amount']) {
+        
+        this.totalSum = this.totalSum+ parseInt(this.dataSource.data[i]['total_amount']);
+      }
+      if (this.dataSource.data[i]['first_installment']) {
+        console.log("come here?")
+        this.firstSum = this.firstSum+ parseInt(this.dataSource.data[i]['first_installment']);
+      }
+      if (this.dataSource.data[i]['second_installment']) {
+        this.secondSum = this.secondSum+ parseInt(this.dataSource.data[i]['second_installment']);
+      }
+      if (this.dataSource.data[i]['third_installment']) {
+        this.thirdSum = this.thirdSum+ parseInt(this.dataSource.data[i]['third_installment']);
+      }
+      if (this.dataSource.data[i]['forth_installment']) {
+        this.forthSum = this.forthSum+ parseInt(this.dataSource.data[i]['forth_installment']);
+      }
+      if (this.dataSource.data[i]['remain_amount']) {
+        this.remainSum = this.remainSum+ parseInt(this.dataSource.data[i]['remain_amount']);
+      }
+    }
+  }
   ngOnInit(): void{
     this.stateId= parseInt(this.actRoute.snapshot.params.stateId);
     this.userService.getRequest('_api/students/getAll', true).subscribe(
@@ -69,6 +105,8 @@ export class ReportComponent implements AfterViewInit, OnInit {
         this.loading = false;
         this.totalData = res['result'];
         this.dataSource.data = res['result'];
+        // sumup
+        this.setSum();
         console.log(res['result']);
       },
       err => {
@@ -136,7 +174,8 @@ export class ReportComponent implements AfterViewInit, OnInit {
         return true;
       }
     });
-    this.dataSource.data= filteredData;
+    this.dataSource.data = filteredData;
+    this.setSum();
   }
   dateMin(type: string, event: MatDatepickerInputEvent<Date>) {
     var someDate = new Date(event.value);

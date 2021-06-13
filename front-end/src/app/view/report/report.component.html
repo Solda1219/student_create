@@ -1,6 +1,6 @@
-<div class='mt-4 ml-1'>
+<div class='mt-4 ml-1 p-2'>
     <div class='row'>
-        <mat-form-field class="col-sm-2 col-6 col-md-2" appearance="fill">
+        <mat-form-field class="col-sm-3 col-6 col-md-3" appearance="fill">
             <mat-label>Enter a date range</mat-label>
             <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
                 <input (dateInput)="dateMin('input', $event)" (dateChange)="dateMin('change', $event)" matStartDate formControlName="start" placeholder="Start date">
@@ -12,30 +12,57 @@
             <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
             <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
         </mat-form-field>
-        <div class="col-sm-2 col-6 col-md-2 p-2 mr-2">
+        <div class="col-sm-3 col-6 col-md-3 p-2">
             <select (change)="stateChange($event)" id="state" name="state" class="form-control">
                 <option [value]= "0">All state
                 </option>
                 <option [value]="state.id" *ngFor="let state of states">{{state.state_name}}</option>
             </select>
         </div>
-        
-        <div class= "col-sm-3 col-6 col-md-3 row p-2">
-            <input (keyup)="totalMin($event)" class= "form-control col-md-3" id="totalmin" type="number" name="totalmin" placeholder="min">
-             <h6 class= "m-2"> Total money </h6> 
-            <input (keyup)="totalMax($event)" class= "form-control col-md-3" id="totalmax" type="number" name="totalmax" placeholder="max">
-        </div>
-        <div class="col-sm-3 col-6 col-md-3 row p-2">
-            <input (keyup)="remainMin($event)" class="form-control col-md-3" id="remainmin" type="number" name="remainmin" placeholder="min">
-            <h6 class="m-2"> Remain money </h6>
-            <input (keyup)="remainMax($event)" class="form-control col-md-3" id="remainmax" type="number" name="remainmax" placeholder="max">
-        </div>
+        <div class="col-sm-3 col-md-3"></div>
         <div class="col-sm-1 col-6 col-md-1 p-1">
             <button type="button" (click)="download()" class="btn btn-block btn-primary">Download</button>
         </div>
         <div class="col-sm-1 col-6 col-md-1 p-1">
             <button type="button" (click)="print()" class="btn btn-block btn-primary">Print</button>
         </div>
+        <div class= "col-sm-2 col-6 col-md-2 row p-1 ml-2">
+            <label class="col-md-5 col-form-label p-1" for="total">Total sum:</label>
+            <div class="col-md-7 p-1">
+                <input disabled class="form-control" id="total" type="number" name="total" [value]= "totalSum" placeholder="total">
+            </div>
+        </div>
+        <div class="col-sm-2 col-6 col-md-2 row p-1 ml-2">
+            <label class="col-md-5 col-form-label p-1" for="first">First sum:</label>
+            <div class="col-md-7 p-1">
+                <input disabled class="form-control" id="first" type="number" name="first" [value]= "firstSum" placeholder="first" >
+            </div>
+        </div>
+        <div class="col-sm-2 col-6 col-md-2 row p-1 ml-2">
+            <label class="col-md-5 col-form-label p-1" for="second">Second sum:</label>
+            <div class="col-md-7 p-1">
+                <input disabled class="form-control" id="second" type="number" name="second" [value]= "secondSum" placeholder="second" >
+            </div>
+        </div>
+        <div class="col-sm-2 col-6 col-md-2 row p-1 ml-2">
+            <label class="col-md-5 col-form-label p-1" for="third">Third sum:</label>
+            <div class="col-md-7 p-1">
+                <input disabled class="form-control" id="third" type="number" name="third" [value]= "thirdSum" placeholder="third" >
+            </div>
+        </div>
+        <div class="col-sm-2 col-6 col-md-2 row p-1 ml-2">
+            <label class="col-md-5 col-form-label p-1" for="forth">Forth sum:</label>
+            <div class="col-md-7 p-1">
+                <input disabled class="form-control" id="forth" type="number" name="forth" [value]= "forthSum" placeholder="forth">
+            </div>
+        </div>
+        <div class="col-sm-2 col-6 col-md-2 row p-1 ml-2">
+            <label class="col-md-5 col-form-label p-1" for="remain">Remain sum:</label>
+            <div class="col-md-7 p-1">
+                <input disabled class="form-control" id="remain" type="number" name="remain" [value]= "remainSum" placeholder="remain">
+            </div>
+        </div>
+        
     </div>
 
     <div class="mat-elevation-z8">
