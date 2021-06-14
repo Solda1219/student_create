@@ -56,10 +56,6 @@ let createStudent = async (req, res) => {
                 created_at
             }
         );
-        var studentsOfstate = JSON.parse(state.students);
-        studentsOfstate.push(student.insertId);
-        var updatedStateStudents = JSON.stringify(studentsOfstate);
-        await state_model.stateUpdate({ ...state, students: updatedStateStudents });
         
         return res.json({ message: 'Success' });
     }
