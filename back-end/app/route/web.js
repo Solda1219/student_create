@@ -14,7 +14,11 @@ const stateController= require('../controller/state')
 router.post('/user/login',userController.login);
 
 //account manage
-router.post('/account/admin/getAdmins',[requireAuth,requireSuper],accountController.getAdmins);
+router.get('/account/admin/getAdmins', [requireAuth], accountController.getAdmins);
+router.post('/account/admin/update', [requireAuth], accountController.updateAdmin);
+router.post('/account/admin/create', [requireAuth], accountController.createAdmin);
+router.get('/account/admin/delete/:adminId', [requireAuth], accountController.deleteAdmin);
+
 router.post('/account/admin/createAdmins',[requireAuth,requireSuper],accountController.createAdmins);
 router.post('/account/admin/editAdmins',[requireAuth,requireSuper],accountController.editAdmins);
 router.post('/account/admin/delAdmins',[requireAuth,requireSuper],accountController.delAdmins);
@@ -47,4 +51,7 @@ router.get('/students/get/:stateId', [requireAuth], studentController.getBystate
 router.get('/student/:studentId', [requireAuth], studentController.getById);
 router.get('/student/delete/:studentId', [requireAuth], studentController.deleteStudent);
 router.get('/students/getAll', [requireAuth], studentController.getAllStudent);
+
+
+// router.get('/admin/getAll', [requireAuth], adminController.getAll);
 module.exports = router

@@ -1,9 +1,10 @@
 <div class= 'mt-4 ml-1'>
   <div class= 'row'>
-    <div class="col-sm-3 col-6 col-md-3">
+    <div class="col-sm-1 col-6 col-md-1">
       <button type="button" (click)="navigateCreate()" class="btn btn-block btn-primary">Create</button>
     </div>
-    <mat-form-field class= 'col-md-8 col-6'>
+    <div class="col-md-8 col-sm-8"></div>
+    <mat-form-field class='col-md-3 col-sm-3 col-6'>
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
     </mat-form-field>

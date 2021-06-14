@@ -15,6 +15,53 @@ let getAdmins = async (req, res) => {
     });
   }
 }
+
+let updateAdmin = async (req, res) => {
+  try {
+    let data = req.body;
+    const { password } = data;
+    if (password == '') {
+      delete data.password;
+    }
+    else {
+      data.password = await hashPassword(password);
+    }
+    await user_model.updateAdmin(data);
+    return res.json({ message: 'Success' });
+  }
+  catch (error) {
+    return res.status(400).json({
+      message: 'Something went wrong.', err: error
+    });
+  }
+}
+let createAdmin = async (req, res) => {
+  try {
+    let data = req.body;
+    const { password } = data;
+    data.password = await hashPassword(password);
+    await user_model.createAdmin(data);
+    return res.json({ message: 'Success' });
+  }
+  catch (error) {
+    return res.status(400).json({
+      message: 'Something went wrong.', err: error
+    });
+  }
+}
+let deleteAdmin = async (req, res) => {
+  try {
+    const id = req.params.adminId;
+    console.log('delid', id);
+    const del = await user_model.deleteAdmin(id);
+    return res.json({ message: 'Success' });
+  }
+  catch (error) {
+    return res.status(400).json({
+      message: 'Something went wrong.', err: error
+    });
+  }
+}
 let createAdmins = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -178,4 +225,7 @@ module.exports = {
   editUser,
   delUser,
   resetPasswordUser,
+  updateAdmin,
+  createAdmin,
+  deleteAdmin
 }

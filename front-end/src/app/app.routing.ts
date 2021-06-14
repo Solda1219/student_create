@@ -49,10 +49,10 @@ export const routes: Routes = [
       //   path: 'dashboard',
       //   loadChildren: () => import('./view/dashboard/dashboard.module').then(m => m.DashboardModule)
       // },
-      // {
-      //   path: 'account',
-      //   loadChildren: () => import('./view/account/account.module').then(m => m.AccountModule)
-      // },
+      {
+        path: 'account',
+        loadChildren: () => import('./view/account/account.module').then(m => m.AccountModule)
+      },
       // {
       //   path: 'group',
       //   loadChildren: () => import('./view/group/group.module').then(m => m.GroupModule)

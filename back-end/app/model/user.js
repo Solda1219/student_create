@@ -21,7 +21,7 @@ let getter = async () => {
 }
 let getAdmin = async () => {
     try {
-       const item = await query.get(table,'*',`WHERE role = 2`);
+       const item = await query.get(table,'*',`WHERE role_name = 'admin'`);
        return item;
     }
     catch (err) {
@@ -48,6 +48,15 @@ let create = async (data) => {
        return false
     }
 }
+let createAdmin = async (data) => {
+    try {
+        const item = await query.create(table, data);
+        return true
+    }
+    catch (err) {
+        return false
+    }
+}
 let update = async (data) => {
     try {
        const {id}=data;
@@ -59,10 +68,33 @@ let update = async (data) => {
         return false;
     }
 }
+
+let updateAdmin = async (data) => {
+    try {
+        const { id } = data;
+        
+        delete data.id;
+        const update = await query.update(table, data, `WHERE id=${id}`);
+        return true
+    }
+    catch (err) {
+        return false;
+    }
+}
 let del = async (id) => {
     try {
        const item = await query.del(table,`WHERE id = ${id}`);  
        return true
+    }
+    catch (err) {
+        return false
+    }
+}
+let deleteAdmin = async (id) => {
+    try {
+        console.log("come here?", id);
+        const item = await query.del(table, `WHERE id = ${id}`);
+        return true
     }
     catch (err) {
         return false
@@ -110,4 +142,7 @@ module.exports = {
     existNotMe,
     exist,
     getUserByMail,
+    updateAdmin,
+    createAdmin,
+    deleteAdmin
 }
