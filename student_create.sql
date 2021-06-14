@@ -31,7 +31,6 @@ CREATE TABLE `states` (
 
 insert  into `states`(`id`,`state_name`,`governorate`) values 
 (1,'edited','edit'),
-(6,'asdfasdfg','asddd'),
 (7,'asdfssss','asdf'),
 (8,'sdfsdfdf','sdfsdf'),
 (9,'sdsdsd','sdsfsdf'),
@@ -63,7 +62,7 @@ CREATE TABLE `students` (
   `notes` longtext DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `students` */
 
@@ -93,7 +92,7 @@ CREATE TABLE `user` (
   `role_name` varchar(50) DEFAULT NULL,
   `password` varchar(200) NOT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `user` */
 
