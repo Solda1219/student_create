@@ -2,11 +2,11 @@
     <button type="button" class="btn btn-pill btn-block btn-primary" style= "width: 100px" data-toggle="modal" (click)="stateCreateModal.show()"><i class="fa fa-plus"></i> State</button>
 
     <div class="row mt-4">
-        <div *ngFor="let state of states; let i = index" (click)= "stateContent(state.id)" class="col-sm-6 col-md-3" style= "cursor: pointer">
+        <div *ngFor="let state of states; let i = index"  class="col-sm-6 col-md-3" style= "cursor: pointer">
             <div class="card text-white bg-info">
                 <div class="card-body">
                     <div class= "row">
-                        <div class="h3 text-muted text-left mb-4 col-md-9">
+                        <div class="h3 text-muted text-left mb-4 col-md-9" (click)= "stateContent(state.id)">
                             {{state.state_name}}
                         </div>
                         <div class="h1 text-muted text-right mb-4 col-md-3">
@@ -14,8 +14,18 @@
                         </div>
                     </div>
                     
-                    <div class="h4 mb-0">{{state.student_count}}</div>
-                    <small class="text-muted text-uppercase font-weight-bold">students</small>
+                    <div class= "row">
+                        <div class= "col-md-6 col-sm-6">
+                            <button type="button" class="btn btn-pill btn-block btn-outline-secondary" style="width: 100px" data-toggle="modal"
+                                (click)="stateEdit(state)">Edit</button>
+
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <button type="button" class="btn btn-pill btn-block btn-outline-danger" style="width: 100px" data-toggle="modal"
+                                (click)="stateDeleteConfirm(state.id)">Delete</button>
+                        
+                        </div>
+                    </div>
                     
                 </div>
             </div>
@@ -56,3 +66,62 @@
     </div><!-- /.modal-dialog -->
 </div>
 <!--/.row-->
+
+<div bsModal #stateEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit State</h4>
+                <button type="button" class="close" (click)="stateEditModal.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formEditGroup" #myEditform="ngForm" (submit)="updateState()">
+                    <div class="input-group mb-3">
+
+                        <input type="text"
+                            [class]="myEditform.submitted&&formEditGroup.get('name').invalid?'form-control form-error':'form-control'"
+                            placeholder="name" formControlName="name">
+                    </div>
+                    <div class="input-group mb-3">
+
+                        <input type="text"
+                            [class]="myEditform.submitted&&formEditGroup.get('governorate').invalid?'form-control form-error':'form-control'"
+                            placeholder="governorate" formControlName="governorate">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="stateEditModal.hide()">Close</button>
+                        <button type="submit" class="btn btn-primarny">Update</button>
+                    </div>
+                </form>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+<div bsModal #stateDelModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-danger" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="stateDelModal.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to delete really?
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="stateDelModal.hide()">Cancel</button>
+                <button type="button" (click)="deleteState()" class="btn btn-danger">Delete</button>
+            </div>
+
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

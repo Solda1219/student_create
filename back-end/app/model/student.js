@@ -20,6 +20,18 @@ let getAllStudent = async () => {
     }
 }
 
+let getStudentsByStateId = async (stateId) => {
+    let students = [];
+    try {
+        const item = await query.get(studenttable, '*', `WHERE state_id=${stateId}`);
+        students = item;
+        return students;
+    }
+    catch (err) {
+        return false
+    }
+}
+
 let getStudentsByIds = async (ids) => {
     let students = [];
     try {
@@ -73,11 +85,24 @@ let deleteStudent = async (id) => {
     }
 }
 
+let deleteStudentsByStateId = async (id) => {
+    try {
+        const item = await query.del(studenttable, `WHERE state_id = ${id}`);
+        return true
+    }
+    catch (err) {
+        console.log(err)
+        return false
+    }
+}
+
 module.exports = {
     createStudent,
     getStudentsByIds,
     getById,
     updateStudent,
     deleteStudent,
-    getAllStudent
+    getAllStudent,
+    getStudentsByStateId,
+    deleteStudentsByStateId
 }

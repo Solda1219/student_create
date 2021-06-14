@@ -134,11 +134,8 @@ let deleteStudent = async (req, res) => {
 }
 let getBystate = async (req, res) => {
     try {
-        console.log(req.params.stateId)
-        const state = await state_model.findStateById(req.params.stateId);
-        var studentsOfstate = JSON.parse(state.students);
-        console.log(studentsOfstate)
-        const students = await student_model.getStudentsByIds(studentsOfstate);
+        let stateId = req.params.stateId;
+        const students = await student_model.getStudentsByStateId(stateId);
         
         return res.json({ result: students });
     }

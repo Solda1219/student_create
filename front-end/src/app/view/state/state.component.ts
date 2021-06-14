@@ -12,8 +12,13 @@ import { CommonFunctionService } from '../../function/commonFunction.service';
 })
 export class StateComponent implements OnInit {
   states = [];
+  editedStateId = 0;
+  deletedStateId = 0;
   formGroup: FormGroup;
+  formEditGroup: FormGroup;
   @ViewChild('stateCreateModal') public stateCreateModal: ModalDirective;
+  @ViewChild('stateEditModal') public stateEditModal: ModalDirective;
+  @ViewChild('stateDelModal') public stateDelModal: ModalDirective;
   loading;
   message = '';
   constructor(
@@ -28,18 +33,18 @@ export class StateComponent implements OnInit {
       name: ['', Validators.required],
       governorate: ['', Validators.required],
     });
+
+    this.formEditGroup = this._formBuilder.group({
+      id: [0, Validators.required],
+      name: ['', Validators.required],
+      governorate: ['', Validators.required],
+    });
     
     this.userService.getRequest('_api/state/all', true).subscribe(
       res => {
         console.log(res['result'])
         let states = res['result'];
-        this.states = [];
-        for (let i = 0; i < states.length; i++){
-          let students = JSON.parse(states[i].students);
-          let student_count = students.length;
-          let state = { ...states[i], student_count };
-          this.states.push(state);
-        }
+        this.states = states;
         console.log(this.states)
       },
       err => {
@@ -64,13 +69,7 @@ export class StateComponent implements OnInit {
           res => {
             console.log(res['result'])
             let states = res['result'];
-            this.states = [];
-            for (let i = 0; i < states.length; i++){
-              let students = JSON.parse(states[i].students);
-              let student_count = students.length;
-              let state = { ...states[i], student_count };
-              this.states.push(state);
-            }
+            this.states = states;
             this.userService.handleSuccess('State created successfully!');
             this.stateCreateModal.hide()
           },
@@ -89,5 +88,62 @@ export class StateComponent implements OnInit {
   }
   stateContent(stateId) {
     this.userService.gotoPage('/state/content/' + stateId);
+  }
+  stateEdit(state) {
+    this.editedStateId = state.id;
+    this.formEditGroup.setValue({ id: state.id, name: state.state_name, governorate: state.governorate });
+    this.stateEditModal.show();
+  }
+  updateState() {
+    let updatedData = this.formEditGroup.value;
+    this.userService.postRequest('_api/state/update', updatedData, true).subscribe(
+      res => {
+        this.userService.getRequest('_api/state/all', true).subscribe(
+          res => {
+            console.log(res['result'])
+            let states = res['result'];
+            this.states = states;
+            this.userService.handleSuccess('State updated successfully!');
+            this.stateEditModal.hide()
+          },
+          err => {
+            this.loading = false;
+            this.userService.handleError(err)
+          }
+        )
+        
+      },
+      err => {
+        this.loading = false;
+        this.userService.handleError(err)
+      }
+    )
+  }
+  stateDeleteConfirm(stateId) {
+    this.deletedStateId = stateId;
+    this.stateDelModal.show();
+  }
+  deleteState() {
+    this.userService.getRequest('_api/state/delete/'+this.deletedStateId, true).subscribe(
+      res => {
+        this.userService.getRequest('_api/state/all', true).subscribe(
+          res => {
+            console.log(res['result'])
+            let states = res['result'];
+            this.states = states;
+            this.userService.handleSuccess('State deleted successfully!');
+            this.stateDelModal.hide()
+          },
+          err => {
+            this.loading = false;
+            this.userService.handleError(err)
+          }
+        )
+      },
+      err => {
+        this.loading = false;
+        this.userService.handleError(err)
+      }
+    )
   }
 }

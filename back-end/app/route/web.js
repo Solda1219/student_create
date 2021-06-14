@@ -38,6 +38,8 @@ router.post('/group/user/delUser',[requireAuth],groupController.delUser);
 
 router.post('/state/create', [requireAuth], stateController.createState);
 router.get('/state/all', [requireAuth], stateController.getAllState);
+router.post('/state/update', [requireAuth], stateController.updateState);
+router.get('/state/delete/:stateId', [requireAuth], stateController.deleteState);
 
 router.post('/student/create', [requireAuth], studentController.createStudent);
 router.post('/student/update', [requireAuth], studentController.updateStudent);

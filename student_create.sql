@@ -24,23 +24,19 @@ CREATE TABLE `states` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `state_name` varchar(100) NOT NULL,
   `governorate` varchar(100) DEFAULT NULL,
-  `students` longtext DEFAULT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `states` */
 
-insert  into `states`(`id`,`state_name`,`governorate`,`students`) values 
-(1,'asdf','asdf','[3,4,6,7,8,9,10,11,12,13,14,15,16,17,18]'),
-(2,'asdfs','asdfs','[5]'),
-(3,'asds','sdsd','[]'),
-(4,'sdss','sss','[]'),
-(5,'asssss','ssss','[]'),
-(6,'asdfas','asddd','[]'),
-(7,'asdfssss','asdf','[]'),
-(8,'sdfsdfdf','sdfsdf','[]'),
-(9,'sdsdsd','sdsfsdf','[]'),
-(10,'new state','governorate name of this state','[]');
+insert  into `states`(`id`,`state_name`,`governorate`) values 
+(1,'edited','edit'),
+(6,'asdfasdfg','asddd'),
+(7,'asdfssss','asdf'),
+(8,'sdfsdfdf','sdfsdf'),
+(9,'sdsdsd','sdsfsdf'),
+(10,'new state','governorate name of this state'),
+(11,'New stae','new gove');
 
 /*Table structure for table `students` */
 
@@ -75,7 +71,6 @@ insert  into `students`(`id`,`state_id`,`name`,`school`,`branch`,`governorate`,`
 (1,1,'asdf','asdf','asdf','asdf','asdfasfd','asdf','Gold Poster','asdf','asdf',0,0,0,0,0,0,'',NULL),
 (2,1,'asdfss','asdfsdf','sdfsdf','sdfsdf','sdfsdf','asdfsdf','Green Poster','asdfasdf','asfd',0,0,0,0,0,0,'',NULL),
 (5,2,'asdfsdfasdfa','asdfsdfsdfsdf','sdfsdfsdf','sdfsdfsdf','sdfsdfsdf','123123123123','Green Poster','asdfasfd','asdfasdfsdf',0,0,0,0,0,0,'',NULL),
-(8,1,'edited','edited','physics','asdfas','asdfasdf','12121232','Green Poster','asf','asdfasdf',233,23,23,0,0,187,'asdf',NULL),
 (9,1,'asfdasfdsdfsdf','sdfsdfsdfsdf','sdfsdfsfdsf','sdfsdfsdfs','sdfsfsf','12123232','','asdfasdf','asdfasdf',0,0,0,0,0,0,'',NULL),
 (11,1,'datedasdf','asdfdasd','sadf23','asdfsadf','asdfsadf','1231232','','','',0,0,0,121,0,0,'','2021-06-12'),
 (12,1,'asdfsfd','remain_correct?','asdfasfd','asdfsfd','asdfasfd','','','','',123,12,10,0,0,NULL,'','2021-06-12'),

@@ -5,6 +5,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 
 /**
@@ -18,6 +19,8 @@ import { ActivatedRoute } from '@angular/router';
 export class StateContentComponent implements AfterViewInit, OnInit {
   stateId = 0;
   loading = true;
+  studentId = 0;
+  @ViewChild('studentDelModal') public studentDelModal: ModalDirective;
   displayedColumns: string[] = [
     'name',
     'school',
@@ -82,11 +85,16 @@ export class StateContentComponent implements AfterViewInit, OnInit {
   edit(studentId) {
     this.userService.gotoPage('state/student/edit/' + studentId);
   }
-  deleteStudent(studentId) {
-    this.userService.getRequest('_api/student/delete/' + studentId, true).subscribe(
+  showDelModal(studentId) {
+    this.studentId = studentId;
+    this.studentDelModal.show();
+  }
+  deleteStudent() {
+    this.userService.getRequest('_api/student/delete/' + this.studentId, true).subscribe(
       res => {
         this.loading = false;
         this.userService.handleSuccess('Student deleted successfully!');
+        this.studentDelModal.hide()
         this.userService.getRequest('_api/students/get/'+this.stateId, true).subscribe(
           res => {
             this.loading = false;

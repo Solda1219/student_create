@@ -41,21 +41,22 @@ let stateUpdate = async (data) => {
         return false;
     }
 }
-let updateGroup = async (data) => {
+let updateState = async (data) => {
     try {
         const { id } = data;
         delete data.id;
-        const update = await query.update(grouptable, data, `WHERE id=${id}`);
+        const update = await query.update(statetable, data, `WHERE id=${id}`);
         return true
     }
     catch (err) {
+        console.log(err)
         return false;
     }
 }
-let delGroup = async (id) => {
+
+let deleteState = async (id) => {
     try {
-        const item = await query.del(grouptable, `WHERE id = ${id}`);
-        const delitem = await query.del(groupusertable, `WHERE group_id = ${id}`);
+        const item = await query.del(statetable, `WHERE id = ${id}`);
         return true
     }
     catch (err) {
@@ -81,5 +82,7 @@ module.exports = {
     createState,
     existState,
     findStateById,
-    stateUpdate
+    stateUpdate,
+    updateState,
+    deleteState
 }
