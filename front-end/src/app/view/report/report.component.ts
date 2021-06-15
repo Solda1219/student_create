@@ -146,10 +146,10 @@ export class ReportComponent implements AfterViewInit, OnInit {
     let maxTotal = 1000000;
     let minRemain = 0;
     let maxRemain = 1000000;
-    if (this.reportFilterData.minDate) {
+    if (this.reportFilterData.minDate+"-0-0") {
       minDate = this.reportFilterData.minDate;
     }
-    if (this.reportFilterData.maxDate) {
+    if (this.reportFilterData.maxDate+ "24-59") {
       maxDate = this.reportFilterData.maxDate;
     }
     if (this.reportFilterData.minTotal) {
@@ -217,8 +217,8 @@ export class ReportComponent implements AfterViewInit, OnInit {
     let data = document.getElementById('pdfData');
     
     html2canvas(data, {
-        scrollX: 100,
-        scrollY: 100
+        scrollX: 200,
+        scrollY: -10
       }).then(canvas => {
         
       const contentDataURL = canvas.toDataURL('image/png', 1.0)  
@@ -230,7 +230,7 @@ export class ReportComponent implements AfterViewInit, OnInit {
       var heightLeft = imgHeight;
     
       var doc = new jsPDF('l', 'mm', 'a4');
-      var position = 2;
+      var position = 5;
     
       doc.addImage(contentDataURL, 'PNG', 3, position, Math.floor(imgWidth * 0.2326), Math.floor(pageHeight * 0.2326));
     
