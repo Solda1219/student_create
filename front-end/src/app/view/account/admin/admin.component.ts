@@ -32,6 +32,7 @@ export class AdminComponent implements AfterViewInit, OnInit {
     'id',
     'name',
     'email',
+    'role',
     'action'
   ];
   dataSource: MatTableDataSource<any>;
@@ -48,8 +49,7 @@ export class AdminComponent implements AfterViewInit, OnInit {
     this.formGroup = this._formBuilder.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
-      role: [1],
-      role_name: ['admin'],
+      role: [2],
       password: ['', Validators.required]
     });
 
@@ -57,8 +57,7 @@ export class AdminComponent implements AfterViewInit, OnInit {
       id: [0, Validators.required],
       name: ['', Validators.required],
       email: ['', Validators.required],
-      role: [1],
-      role_name: ['admin'],
+      role: [2],
       password: ['']
     });
     this.userService.getRequest('_api/account/admin/getAdmins', true).subscribe(
@@ -116,7 +115,7 @@ export class AdminComponent implements AfterViewInit, OnInit {
   }
   edit(admin) {
     this.editedAdminId = admin.id;
-    this.formEditGroup.patchValue({id: this.editedAdminId, name: admin.name, email: admin.email})
+    this.formEditGroup.patchValue({id: this.editedAdminId, name: admin.name, email: admin.email, role: admin.role, role_name: admin.role_name })
     this.adminEditModal.show();
   }
   showDelModal(adminId) {
@@ -149,6 +148,7 @@ export class AdminComponent implements AfterViewInit, OnInit {
   }
   updateAdmin() {
     let data = this.formEditGroup.value;
+    console.log(data);
     this.userService.postRequest('_api/account/admin/update', data, true).subscribe(
       res => {
         this.userService.getRequest('_api/account/admin/getAdmins', true).subscribe(

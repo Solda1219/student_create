@@ -25,7 +25,7 @@
             <button type="button" (click)="download()" class="btn btn-block btn-primary">Download</button>
         </div>
         <div class="col-sm-1 col-6 col-md-1 p-1">
-            <button type="button" (click)="print()" class="btn btn-block btn-primary">Print</button>
+            <button type="button" class="btn btn-block btn-primary">Print</button>
         </div>
         <div class= "col-sm-2 col-6 col-md-2 row p-1 ml-2">
             <label class="col-md-5 col-form-label p-1" for="total">Total sum:</label>
@@ -66,9 +66,8 @@
         
     </div>
 
-    <div class="mat-elevation-z8" >
-        <table mat-table [dataSource]="dataSource" matSort class= "p-1" id="pdfData" #pdfData>
-            
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort class= "p-1" id="pdfData" #pdfData >
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
                 <td mat-cell *matCellDef="let row"> {{row.name}} </td>
@@ -79,10 +78,10 @@
                 <td mat-cell *matCellDef="let row"> {{row.school}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="branch">
+            <!-- <ng-container matColumnDef="branch">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Branch </th>
                 <td mat-cell *matCellDef="let row"> {{row.branch}} </td>
-            </ng-container>
+            </ng-container> -->
 
             <ng-container matColumnDef="governorate">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Governorate </th>
@@ -109,10 +108,10 @@
                 <td mat-cell *matCellDef="let row"> {{row.code}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="identification">
+            <!-- <ng-container matColumnDef="identification">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
                 <td mat-cell *matCellDef="let row"> {{row.identification}} </td>
-            </ng-container>
+            </ng-container> -->
 
             <ng-container matColumnDef="total_amount">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Amount </th>

@@ -19,12 +19,18 @@ let getAdmins = async (req, res) => {
 let updateAdmin = async (req, res) => {
   try {
     let data = req.body;
-    const { password } = data;
+    const { password, role } = data;
     if (password == '') {
       delete data.password;
     }
     else {
       data.password = await hashPassword(password);
+    }
+    if (role == 1 || role == 2) {
+      data.role_name = 'admin';
+    }
+    else {
+      data.role_name = 'user';
     }
     await user_model.updateAdmin(data);
     return res.json({ message: 'Success' });
@@ -38,7 +44,13 @@ let updateAdmin = async (req, res) => {
 let createAdmin = async (req, res) => {
   try {
     let data = req.body;
-    const { password } = data;
+    const { password, role } = data;
+    if (role == 1 || role == 2) {
+      data.role_name = 'admin';
+    }
+    else {
+      data.role_name = 'user';
+    }
     data.password = await hashPassword(password);
     await user_model.createAdmin(data);
     return res.json({ message: 'Success' });

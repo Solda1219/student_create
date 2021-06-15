@@ -46,13 +46,11 @@ export class ReportComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
     'name',
     'school',
-    'branch',
     'governorate',
     'institute',
     'phone',
     'poster',
     'code',
-    'identification',
     'total_amount',
     'first_installment',
     'second_installment',
@@ -217,19 +215,13 @@ export class ReportComponent implements AfterViewInit, OnInit {
   }
   public download():void {
     let data = document.getElementById('pdfData');
+    
+    html2canvas(data, {
+        scrollX: 100,
+        scrollY: 100
+      }).then(canvas => {
         
-    html2canvas(data).then(canvas => {
-        
-        // let fileWidth = 1720;
-        // let fileHeight = canvas.height * fileWidth / canvas.width;
-        
-        // const FILEURI = canvas.toDataURL('image/png')
-        // let PDF = new jsPDF('l', 'pt', [canvas.width, canvas.height]);
-        // let position = 0;
-        // PDF.addImage(FILEURI, 'PNG', 0, position, canvas.width, canvas.height)
-        
-        // PDF.save('angular-demo.pdf');
-      const contentDataURL = canvas.toDataURL('image/png', 0.00005)  
+      const contentDataURL = canvas.toDataURL('image/png', 1.0)  
       // var imgWidth = 200; 
       // var pageHeight = 295;
       var imgWidth = canvas.width; 
@@ -238,9 +230,9 @@ export class ReportComponent implements AfterViewInit, OnInit {
       var heightLeft = imgHeight;
     
       var doc = new jsPDF('l', 'mm', 'a4');
-      var position = 0;
+      var position = 2;
     
-      doc.addImage(contentDataURL, 'PNG', 10, position, Math.floor(imgWidth * 0.2648), Math.floor(pageHeight * 0.2648));
+      doc.addImage(contentDataURL, 'PNG', 3, position, Math.floor(imgWidth * 0.2326), Math.floor(pageHeight * 0.2326));
     
       heightLeft -= pageHeight;
     
@@ -251,27 +243,7 @@ export class ReportComponent implements AfterViewInit, OnInit {
         heightLeft -= pageHeight;
       }
       doc.save( 'file.pdf');
+
     });     
-  //   var fbcanvas = document.getElementById('pdfData');
-  //  html2canvas(fbcanvas=>
-  //       {
-
-  //           onrendered: function (canvas) {
-
-  //               var width = canvas.width;
-  //               var height = canvas.height;
-  //               var millimeters = {};
-  //               millimeters.width = Math.floor(width * 0.264583);
-  //               millimeters.height = Math.floor(height * 0.264583);
-
-  //               var imgData = canvas.toDataURL(
-  //                   'image/png');
-  //               var doc = new jsPDF("p", "mm", "a4");
-  //               doc.deletePage(1);
-  //               doc.addPage(millimeters.width, millimeters.height);
-  //               doc.addImage(imgData, 'PNG', 0, 0);
-  //               doc.save('WebSiteScreen.pdf');
-  //           }
-  //       });
   }
 }

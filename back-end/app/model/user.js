@@ -21,7 +21,7 @@ let getter = async () => {
 }
 let getAdmin = async () => {
     try {
-       const item = await query.get(table,'*',`WHERE role_name = 'admin'`);
+       const item = await query.get(table,'*',`WHERE id > 0`);
        return item;
     }
     catch (err) {
