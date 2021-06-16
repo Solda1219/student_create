@@ -95,6 +95,11 @@ export class StateComponent implements OnInit {
     this.stateEditModal.show();
   }
   updateState() {
+    if(!this.formEditGroup.valid) {
+      this.message = "Username and Password must be valid."
+      this.userService.errorMessage("Please input fields correctly.");
+      return
+    }
     let updatedData = this.formEditGroup.value;
     this.userService.postRequest('_api/state/update', updatedData, true).subscribe(
       res => {
