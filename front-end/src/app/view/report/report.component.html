@@ -25,7 +25,7 @@
             <button type="button" (click)="download()" class="btn btn-block btn-primary">Download</button>
         </div>
         <div class="col-sm-1 col-6 col-md-1 p-1">
-            <button type="button" class="btn btn-block btn-primary">Print</button>
+            <button type="button" (click)= "print()" class="btn btn-block btn-primary">Print</button>
         </div>
         <div class= "col-sm-2 col-6 col-md-2 row p-1 ml-2">
             <label class="col-md-5 col-form-label p-1" for="total">Total sum:</label>
@@ -66,7 +66,7 @@
         
     </div>
 
-    <div class="mat-elevation-z8">
+    <div class="mat-elevation-z8" id= "printEl">
         <table mat-table [dataSource]="dataSource" matSort class= "p-1" id="pdfData" #pdfData >
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>

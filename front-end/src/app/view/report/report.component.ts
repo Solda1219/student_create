@@ -217,7 +217,7 @@ export class ReportComponent implements AfterViewInit, OnInit {
     let data = document.getElementById('pdfData');
     
     html2canvas(data, {
-        scrollX: 200,
+        scrollX: 130,
         scrollY: -10
       }).then(canvas => {
         
@@ -246,4 +246,45 @@ export class ReportComponent implements AfterViewInit, OnInit {
 
     });     
   }
+  public print(): void {
+    let printContents, popupWin;
+    printContents = document.getElementById('printEl').innerHTML;
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <title>Print tab</title>
+          <style>
+          .mat-row .mat-cell {
+              cursor: pointer;
+              padding-right: 10px;
+              margin-right:20px;
+            }
+            tr:hover {
+              background: #efefef;
+            }
+            
+            .mat-form-field {
+              font-size: 14px;
+              width: 100%;
+            
+            }
+            
+            
+            
+            .mat-table-sticky-border-elem-right {
+              border-left: 1px solid #e0e0e0;
+            }
+            
+            .mat-table-sticky-border-elem-left {
+              border-right: 1px solid #e0e0e0;
+            }
+          </style>
+        </head>
+    <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+    );
+    popupWin.document.close();
+}
 }
