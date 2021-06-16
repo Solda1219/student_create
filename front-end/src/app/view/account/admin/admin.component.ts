@@ -89,6 +89,10 @@ export class AdminComponent implements AfterViewInit, OnInit {
   }
 
   createAdmin() {
+    if(!this.formGroup.valid){
+      this.userService.errorMessage("Please input all required field!");
+      return;
+    }
     let data = this.formGroup.value;
     this.userService.postRequest('_api/account/admin/create', data, true).subscribe(
       res => {
@@ -147,6 +151,10 @@ export class AdminComponent implements AfterViewInit, OnInit {
     );
   }
   updateAdmin() {
+    if(!this.formEditGroup.valid){
+      this.userService.errorMessage("Please input all required field!");
+      return;
+    }
     let data = this.formEditGroup.value;
     console.log(data);
     this.userService.postRequest('_api/account/admin/update', data, true).subscribe(
