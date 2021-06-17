@@ -14,6 +14,8 @@ export class StateComponent implements OnInit {
   states = [];
   editedStateId = 0;
   deletedStateId = 0;
+  user= {};
+  role= 0;
   formGroup: FormGroup;
   formEditGroup: FormGroup;
   @ViewChild('stateCreateModal') public stateCreateModal: ModalDirective;
@@ -29,6 +31,8 @@ export class StateComponent implements OnInit {
 
   ngOnInit(): void {
     // generate random values for mainChart
+    this.role= this.userService.getToken().userInfo.role;
+
     this.formGroup = this._formBuilder.group({
       name: ['', Validators.required],
       governorate: ['', Validators.required],
@@ -39,8 +43,7 @@ export class StateComponent implements OnInit {
       name: ['', Validators.required],
       governorate: ['', Validators.required],
     });
-    
-    this.userService.getRequest('_api/state/all', true).subscribe(
+    this.userService.postRequest('_api/state/getStatesByRole',{role: this.role}, true).subscribe(
       res => {
         console.log(res['result'])
         let states = res['result'];

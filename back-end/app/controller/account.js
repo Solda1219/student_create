@@ -1,6 +1,7 @@
 const { hashPassword, verifyPassword } = require('../utils/authentication');
 const setting = require('../../config/setting');
 const user_model = require('../model/user');
+const state_model = require('../model/state');
 const fileController = require("./file");
 const core_func = require('../utils/core_func');
 //admin
@@ -26,11 +27,15 @@ let updateAdmin = async (req, res) => {
     else {
       data.password = await hashPassword(password);
     }
-    if (role == 1 || role == 2) {
-      data.role_name = 'admin';
+    if (role == -1) {
+      data.role_name = 'super';
+    }
+    else if (role == -2) {
+      data.role_name = 'user';
     }
     else {
-      data.role_name = 'user';
+      let stateData = await state_model.findStateById(role);
+      data.role_name = stateData.state_name
     }
     await user_model.updateAdmin(data);
     return res.json({ message: 'Success' });
@@ -45,11 +50,15 @@ let createAdmin = async (req, res) => {
   try {
     let data = req.body;
     const { password, role } = data;
-    if (role == 1 || role == 2) {
-      data.role_name = 'admin';
+    if (role == -1) {
+      data.role_name = 'super';
+    }
+    else if (role == -2) {
+      data.role_name = 'user';
     }
     else {
-      data.role_name = 'user';
+      let stateData = await state_model.findStateById(role);
+      data.role_name= stateData.state_name
     }
     data.password = await hashPassword(password);
     await user_model.createAdmin(data);

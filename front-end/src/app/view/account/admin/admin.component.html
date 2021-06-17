@@ -96,8 +96,7 @@
 
           <div class="input-group mb-3">
             <select id="role" name="role" class="form-control" formControlName="role">
-              <option value="2">Admin</option>
-              <option value="3">User</option>
+              <option *ngFor="let role of roles" [value]="role.id">{{role.state_name}}</option>
             </select>
           </div>
           <div class="modal-footer">
@@ -144,8 +143,7 @@
           </div>
           <div class="input-group mb-3">
             <select id="role" name="role" class="form-control" formControlName="role">
-              <option value="2">Admin</option>
-              <option value="3">User</option>
+              <option *ngFor="let role of roles" [value]="role.id">{{role.state_name}}</option>
             </select>
           </div>
           <div class="modal-footer">

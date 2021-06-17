@@ -11,7 +11,7 @@ export const navItems = [
     name: 'Account',
     icon: 'cil-user-follow',
     url: '/account',
-    role:2,
+    role:-1,
     children: [
       {
         name: 'admin',
@@ -32,14 +32,14 @@ export const navItems = [
     name: 'State',
     icon: 'fa fa-group',
     url: '/state',
-    role:-1,
+    role:2,
 
   },
   {
     name: 'Report',
     icon: 'cil-triangle',
     url: '/report',
-    role:-1,
+    role:2,
 
   },
 ];

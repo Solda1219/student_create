@@ -15,9 +15,9 @@ router.post('/user/login',userController.login);
 
 //account manage
 router.get('/account/admin/getAdmins', [requireAuth], accountController.getAdmins);
-router.post('/account/admin/update', [requireAuth, requireAdmin], accountController.updateAdmin);
-router.post('/account/admin/create', [requireAuth, requireAdmin], accountController.createAdmin);
-router.get('/account/admin/delete/:adminId', [requireAuth, requireAdmin], accountController.deleteAdmin);
+router.post('/account/admin/update', [requireAuth, requireSuper], accountController.updateAdmin);
+router.post('/account/admin/create', [requireAuth, requireSuper], accountController.createAdmin);
+router.get('/account/admin/delete/:adminId', [requireAuth, requireSuper], accountController.deleteAdmin);
 
 router.post('/account/admin/createAdmins',[requireAuth,requireSuper],accountController.createAdmins);
 router.post('/account/admin/editAdmins',[requireAuth,requireSuper],accountController.editAdmins);
@@ -40,10 +40,11 @@ router.post('/group/user/createUser',[requireAuth],groupController.createUser);
 router.post('/group/user/editUser',[requireAuth],groupController.editUser);
 router.post('/group/user/delUser',[requireAuth],groupController.delUser);
 
-router.post('/state/create', [requireAuth, requireAdmin], stateController.createState);
+router.post('/state/create', [requireAuth, requireSuper], stateController.createState);
 router.get('/state/all', [requireAuth], stateController.getAllState);
-router.post('/state/update', [requireAuth, requireAdmin], stateController.updateState);
-router.get('/state/delete/:stateId', [requireAuth, requireAdmin], stateController.deleteState);
+router.post('/state/update', [requireAuth, requireSuper], stateController.updateState);
+router.get('/state/delete/:stateId', [requireAuth, requireSuper], stateController.deleteState);
+router.post('/state/getStatesByRole', [requireAuth], stateController.getStatesByRole);
 
 router.post('/student/create', [requireAuth], studentController.createStudent);
 router.post('/student/update', [requireAuth], studentController.updateStudent);
@@ -51,6 +52,7 @@ router.get('/students/get/:stateId', [requireAuth], studentController.getBystate
 router.get('/student/:studentId', [requireAuth], studentController.getById);
 router.get('/student/delete/:studentId', [requireAuth], studentController.deleteStudent);
 router.get('/students/getAll', [requireAuth], studentController.getAllStudent);
+router.post('/students/getStudentsByRole', [requireAuth], studentController.getStudentsByRole);
 
 
 // router.get('/admin/getAll', [requireAuth], adminController.getAll);

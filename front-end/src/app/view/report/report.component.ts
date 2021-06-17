@@ -32,6 +32,7 @@ export class ReportComponent implements AfterViewInit, OnInit {
   thirdSum = 0;
   forthSum = 0;
   remainSum = 0;
+  role= 0;
   reportFilterData = {
     minDate: 0,
     maxDate: 100000000000000,
@@ -99,8 +100,9 @@ export class ReportComponent implements AfterViewInit, OnInit {
     }
   }
   ngOnInit(): void{
+    this.role= this.userService.getToken().userInfo.role;
     this.stateId= parseInt(this.actRoute.snapshot.params.stateId);
-    this.userService.getRequest('_api/students/getAll', true).subscribe(
+    this.userService.postRequest('_api/students/getStudentsByRole', {role: this.role}, true).subscribe(
       res => {
         this.loading = false;
         this.totalData = res['result'];
@@ -115,12 +117,16 @@ export class ReportComponent implements AfterViewInit, OnInit {
         this.userService.handleError(err)
       }
     );
-    this.userService.getRequest('_api/state/all', true).subscribe(
+    this.userService.postRequest('_api/state/getStatesByRole',{role: this.role}, true).subscribe(
       res => {
-        this.states = res['result'];
+        console.log(res['result'])
+        let states = res['result'];
+        this.states = states;
+        console.log(this.states)
       },
       err => {
         this.loading = false;
+        this.userService.handleError(err)
       }
     )
   }

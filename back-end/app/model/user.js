@@ -132,6 +132,16 @@ let existNotMe = async (id,val) => {
         return false;
     }
 }
+let deleteUsersByStateId = async (id) => {
+    try {
+        const item = await query.del(table, `WHERE role = ${id}`);
+        return true
+    }
+    catch (err) {
+        console.log(err)
+        return false
+    }
+}
 module.exports = {
     getter,
     getAdmin,
@@ -144,5 +154,6 @@ module.exports = {
     getUserByMail,
     updateAdmin,
     createAdmin,
-    deleteAdmin
+    deleteAdmin,
+    deleteUsersByStateId
 }

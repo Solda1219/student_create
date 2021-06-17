@@ -23,6 +23,7 @@ export class AdminComponent implements AfterViewInit, OnInit {
   studentId = 0;
   editedAdminId = 0;
   deletedAdminId = 0;
+  roles= [{'id': -1 , 'state_name': 'Super Admin'}, {'id': -2, 'state_name':'User'}];
   formGroup: FormGroup;
   formEditGroup: FormGroup;
   @ViewChild('adminDelModal') public adminDelModal: ModalDirective;
@@ -49,7 +50,7 @@ export class AdminComponent implements AfterViewInit, OnInit {
     this.formGroup = this._formBuilder.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
-      role: [2],
+      role: [-2],
       password: ['', Validators.required]
     });
 
@@ -57,9 +58,19 @@ export class AdminComponent implements AfterViewInit, OnInit {
       id: [0, Validators.required],
       name: ['', Validators.required],
       email: ['', Validators.required],
-      role: [2],
+      role: [-2],
       password: ['']
     });
+    this.userService.getRequest('_api/state/all', true).subscribe(
+      res => {
+        console.log(res['result'])
+        this.roles= this.roles.concat(res['result']);
+      },
+      err => {
+        this.loading = false;
+        this.userService.handleError(err)
+      }
+    )
     this.userService.getRequest('_api/account/admin/getAdmins', true).subscribe(
       res => {
         this.loading = false;

@@ -107,6 +107,27 @@ let getAllStudent = async (req, res) => {
     }
 }
 
+let getStudentsByRole = async (req, res) => {
+
+    try {
+        if (req.body.role === -1) {
+            const students = await student_model.getAllStudent();
+
+            return res.json({ result: students });
+        }
+        else {
+            const students = await student_model.getStudentsByStateId(req.body.role);
+            return res.json({ result: students });
+        }
+    }
+    catch (error) {
+        return res.status(400).json({
+            message: 'Something went wrong.', err: error
+        });
+    }
+
+}
+
 let updateStudent = async (req, res) => {
     let data = req.body;
     console.log('edited', data);
@@ -161,5 +182,6 @@ module.exports = {
     getById,
     updateStudent,
     deleteStudent,
-    getAllStudent
+    getAllStudent,
+    getStudentsByRole
 }
