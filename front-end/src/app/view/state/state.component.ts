@@ -15,7 +15,8 @@ export class StateComponent implements OnInit {
   editedStateId = 0;
   deletedStateId = 0;
   user= {};
-  role= 0;
+  role= [];
+  isSuper;
   formGroup: FormGroup;
   formEditGroup: FormGroup;
   @ViewChild('stateCreateModal') public stateCreateModal: ModalDirective;
@@ -31,7 +32,13 @@ export class StateComponent implements OnInit {
 
   ngOnInit(): void {
     // generate random values for mainChart
-    this.role= this.userService.getToken().userInfo.role;
+    this.role= JSON.parse(this.userService.getToken().userInfo.role);
+    if(this.role.includes(-1)){
+      this.isSuper= true;
+    }
+    else{
+      this.isSuper= false
+    }
 
     this.formGroup = this._formBuilder.group({
       name: ['', Validators.required],

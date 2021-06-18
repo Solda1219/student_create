@@ -20,6 +20,8 @@ export class StateContentComponent implements AfterViewInit, OnInit {
   stateId = 0;
   loading = true;
   studentId = 0;
+  isSuper;
+  role= [];
   @ViewChild('studentDelModal') public studentDelModal: ModalDirective;
   displayedColumns: string[] = [
     'name',
@@ -50,6 +52,13 @@ export class StateContentComponent implements AfterViewInit, OnInit {
     
   }
   ngOnInit(): void{
+    this.role= JSON.parse(this.userService.getToken().userInfo.role);
+    if(this.role.includes(-1)){
+      this.isSuper= true;
+    }
+    else{
+      this.isSuper= false
+    }
     this.stateId= parseInt(this.actRoute.snapshot.params.stateId);
     this.userService.getRequest('_api/students/get/'+this.stateId, true).subscribe(
       res => {

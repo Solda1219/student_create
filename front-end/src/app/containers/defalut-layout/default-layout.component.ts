@@ -99,10 +99,10 @@ export class DefaultLayoutComponent implements OnInit {
   }
   //set nav item
   setNavItemByRole(){
-    const user_role = this.user.role;
+    const user_role = JSON.parse(this.user.role);
     for(let i=0; i < this.nav.length; i++){
       const {role,children} = this.nav[i];
-      if(user_role==-1) continue
+      if(user_role.includes(-1)) continue
       else{
         if(role==-1) {
           this.nav.splice(i,1);

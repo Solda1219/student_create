@@ -16,6 +16,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
   selector: 'admin-content',
   styleUrls: ['admin.component.scss'],
   templateUrl: 'admin.component.html',
+  
 })
 export class AdminComponent implements AfterViewInit, OnInit {
   adminId = 0;
@@ -23,7 +24,7 @@ export class AdminComponent implements AfterViewInit, OnInit {
   studentId = 0;
   editedAdminId = 0;
   deletedAdminId = 0;
-  roles= [{'id': -1 , 'state_name': 'Super Admin'}, {'id': -2, 'state_name':'User'}];
+  roles= [{'id': -1 , 'state_name': 'Super Admin'}];
   formGroup: FormGroup;
   formEditGroup: FormGroup;
   @ViewChild('adminDelModal') public adminDelModal: ModalDirective;
@@ -50,7 +51,7 @@ export class AdminComponent implements AfterViewInit, OnInit {
     this.formGroup = this._formBuilder.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
-      role: [-2],
+      role: [[], Validators.required],
       password: ['', Validators.required]
     });
 
@@ -58,7 +59,7 @@ export class AdminComponent implements AfterViewInit, OnInit {
       id: [0, Validators.required],
       name: ['', Validators.required],
       email: ['', Validators.required],
-      role: [-2],
+      role: [[], Validators.required],
       password: ['']
     });
     this.userService.getRequest('_api/state/all', true).subscribe(
@@ -105,6 +106,7 @@ export class AdminComponent implements AfterViewInit, OnInit {
       return;
     }
     let data = this.formGroup.value;
+
     this.userService.postRequest('_api/account/admin/create', data, true).subscribe(
       res => {
         this.userService.getRequest('_api/account/admin/getAdmins', true).subscribe(
@@ -130,7 +132,7 @@ export class AdminComponent implements AfterViewInit, OnInit {
   }
   edit(admin) {
     this.editedAdminId = admin.id;
-    this.formEditGroup.patchValue({id: this.editedAdminId, name: admin.name, email: admin.email, role: admin.role, role_name: admin.role_name })
+    this.formEditGroup.patchValue({id: this.editedAdminId, name: admin.name, email: admin.email, role: JSON.parse(admin.role), role_name: admin.role_name })
     this.adminEditModal.show();
   }
   showDelModal(adminId) {

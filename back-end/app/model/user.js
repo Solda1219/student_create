@@ -29,6 +29,7 @@ let getAdmin = async () => {
         return [];
     }
 }
+
 let getUser = async () => {
     try {
        const item = await query.get(table,'*',`WHERE role = 6`);

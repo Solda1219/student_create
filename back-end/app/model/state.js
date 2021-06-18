@@ -19,17 +19,37 @@ let createState = async (data) => {
         return false
     }
 }
-let findStateById = async (id) => {
+let findStatesByIds = async (ids) => {
     try {
-        const item = await query.get(statetable, '*', `WHERE id=${id}`);
-        if (item.length > 0) return item[0];
+        let states = [];
+        for (let i = 0; i < ids.length; i++){
+            const item = await query.get(statetable, '*', `WHERE id=${ids[i]}`);
+            if (item.length > 0) states.push(item[0]);
+        }
+        return states;
     }
     catch (err) {
         return false;
     }
 }
 
+let getRoleNameByRole = async (roles) => {
+    var role_name = "";
+    try {
+        for (let i = 0; i < roles.length; i++) {
+            const item = await query.get(statetable, '*', `WHERE id= ${roles[i]}`);
+            if (item.length > 0) {
+                role_name+= item[0].state_name+ ", ";
+            }
+        }
 
+        return role_name;
+    }
+    catch (err) {
+        console.log(err)
+        return [];
+    }
+}
 let stateUpdate = async (data) => {
     try {
         const { id } = data;
@@ -81,8 +101,9 @@ module.exports = {
     getAllState,
     createState,
     existState,
-    findStateById,
+    findStatesByIds,
     stateUpdate,
     updateState,
-    deleteState
+    deleteState,
+    getRoleNameByRole
 }

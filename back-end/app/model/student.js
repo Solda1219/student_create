@@ -20,11 +20,16 @@ let getAllStudent = async () => {
     }
 }
 
-let getStudentsByStateId = async (stateId) => {
+let getStudentsByStateIds = async (stateIds) => {
     let students = [];
     try {
-        const item = await query.get(studenttable, '*', `WHERE state_id=${stateId}`);
-        students = item;
+        for (let i = 0; i < stateIds.length; i++){
+            let newStudents= students
+            const item = await query.get(studenttable, '*', `WHERE state_id=${stateIds[i]}`);
+            if (item.length > 0) {
+                students = newStudents.concat(item);
+            } 
+        }
         return students;
     }
     catch (err) {
@@ -103,6 +108,6 @@ module.exports = {
     updateStudent,
     deleteStudent,
     getAllStudent,
-    getStudentsByStateId,
+    getStudentsByStateIds,
     deleteStudentsByStateId
 }

@@ -50,7 +50,7 @@ router.post('/student/create', [requireAuth], studentController.createStudent);
 router.post('/student/update', [requireAuth], studentController.updateStudent);
 router.get('/students/get/:stateId', [requireAuth], studentController.getBystate);
 router.get('/student/:studentId', [requireAuth], studentController.getById);
-router.get('/student/delete/:studentId', [requireAuth], studentController.deleteStudent);
+router.get('/student/delete/:studentId', [requireAuth, requireSuper], studentController.deleteStudent);
 router.get('/students/getAll', [requireAuth], studentController.getAllStudent);
 router.post('/students/getStudentsByRole', [requireAuth], studentController.getStudentsByRole);
 

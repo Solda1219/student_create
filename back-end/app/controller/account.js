@@ -7,8 +7,20 @@ const core_func = require('../utils/core_func');
 //admin
 let getAdmins = async (req, res) => {
   try {
-    const item = await user_model.getAdmin();
-    return res.json({ result: item });
+    var items = await user_model.getAdmin();
+    for (let i = 0; i < items.length; i++) {
+      const { role } = items[i];
+      var inserted_role_name = "";
+      var role_name = await state_model.getRoleNameByRole(JSON.parse(role));
+      if (JSON.parse(role).includes(-1)) {
+        inserted_role_name = "Super Admin, " + role_name;
+      }
+      else {
+        inserted_role_name = role_name;
+      }
+      items[i].role_name = inserted_role_name;
+    }
+    return res.json({ result: items });
   }
   catch (error) {
     return res.status(400).json({
@@ -27,16 +39,7 @@ let updateAdmin = async (req, res) => {
     else {
       data.password = await hashPassword(password);
     }
-    if (role == -1) {
-      data.role_name = 'super';
-    }
-    else if (role == -2) {
-      data.role_name = 'user';
-    }
-    else {
-      let stateData = await state_model.findStateById(role);
-      data.role_name = stateData.state_name
-    }
+    data.role = JSON.stringify(role);
     await user_model.updateAdmin(data);
     return res.json({ message: 'Success' });
   }
@@ -50,16 +53,7 @@ let createAdmin = async (req, res) => {
   try {
     let data = req.body;
     const { password, role } = data;
-    if (role == -1) {
-      data.role_name = 'super';
-    }
-    else if (role == -2) {
-      data.role_name = 'user';
-    }
-    else {
-      let stateData = await state_model.findStateById(role);
-      data.role_name= stateData.state_name
-    }
+    data.role = JSON.stringify(role);
     data.password = await hashPassword(password);
     await user_model.createAdmin(data);
     return res.json({ message: 'Success' });

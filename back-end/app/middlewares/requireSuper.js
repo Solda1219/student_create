@@ -1,5 +1,5 @@
 const requireAdmin = (req, res, next) => {
-  if (req.user.role===-1){
+  if (req.user.role.includes(-1)){
     next();
     
   } else{

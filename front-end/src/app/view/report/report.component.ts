@@ -48,7 +48,7 @@ export class ReportComponent implements AfterViewInit, OnInit {
   thirdSum = 0;
   forthSum = 0;
   remainSum = 0;
-  role= 0;
+  role= [];
   reportFilterData = {
     minDate: 0,
     maxDate: 100000000000000,
@@ -122,12 +122,14 @@ export class ReportComponent implements AfterViewInit, OnInit {
     }
   }
   ngOnInit(): void{
-    this.role= this.userService.getToken().userInfo.role;
+    this.role= JSON.parse(this.userService.getToken().userInfo.role);
     this.stateId= parseInt(this.actRoute.snapshot.params.stateId);
     this.userService.postRequest('_api/students/getStudentsByRole', {role: this.role}, true).subscribe(
       res => {
         this.loading = false;
+        
         this.totalData = res['result'];
+        console.log('totalData', this.totalData);
         this.dataSource.data = res['result'];
         // sumup
         this.setSum();

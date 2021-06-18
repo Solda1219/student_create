@@ -1,6 +1,6 @@
 <div class="nav-tile-text">States</div>
 <div class= "m-5, p-5">
-    <button *ngIf="role== -1"  type="button" class="btn btn-pill btn-block btn-primary" style= "width: 100px" data-toggle="modal" (click)="stateCreateModal.show()"><i class="fa fa-plus"></i> State</button>
+    <button *ngIf="isSuper"  type="button" class="btn btn-pill btn-block btn-primary" style= "width: 100px" data-toggle="modal" (click)="stateCreateModal.show()"><i class="fa fa-plus"></i> State</button>
 
     <div class="row mt-4">
         <div *ngFor="let state of states; let i = index"  class="col-sm-6 col-md-3" style= "cursor: pointer">
@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     
-                    <div class= "row" *ngIf="role== -1">
+                    <div class= "row" *ngIf="isSuper">
                         <div class= "col-md-6 col-sm-6">
                             <button type="button" class="btn btn-pill btn-block btn-outline-secondary" style="width: 100px" data-toggle="modal"
                                 (click)="stateEdit(state)">Edit</button>

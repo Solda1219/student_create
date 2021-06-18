@@ -94,11 +94,17 @@
               placeholder="password" formControlName="password">
           </div>
 
-          <div class="input-group mb-3">
+          <!-- <div class="input-group mb-3">
             <select id="role" name="role" class="form-control" formControlName="role">
               <option *ngFor="let role of roles" [value]="role.id">{{role.state_name}}</option>
             </select>
-          </div>
+          </div> -->
+          <mat-form-field appearance="fill">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role" multiple>
+              <mat-option *ngFor="let role of roles" [value]="role.id">{{role.state_name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="adminCreateModal.hide()">Close</button>
             <button type="submit" class="btn btn-primarny">Create</button>
@@ -141,11 +147,12 @@
               [class]="myEditform.submitted&&formEditGroup.get('password').invalid?'form-control form-error':'form-control'"
               placeholder="password" formControlName="password">
           </div>
-          <div class="input-group mb-3">
-            <select id="role" name="role" class="form-control" formControlName="role">
-              <option *ngFor="let role of roles" [value]="role.id">{{role.state_name}}</option>
-            </select>
-          </div>
+          <mat-form-field appearance="fill">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role" multiple>
+              <mat-option *ngFor="let role of roles" [value]="role.id">{{role.state_name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="adminEditModal.hide()">Close</button>
             <button type="submit" class="btn btn-primarny">Update</button>

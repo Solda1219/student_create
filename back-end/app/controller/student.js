@@ -20,7 +20,7 @@ let createStudent = async (req, res) => {
         
         const data = req.body;
         console.log(data.stateId)
-        const state = await state_model.findStateById(data.stateId);
+        const state = await state_model.findStatesByIds([data.stateId]);
         if (!state) return res.status(400).json({
             message: 'There is no state for that.'
         })
@@ -130,13 +130,13 @@ let getAllStudent = async (req, res) => {
 let getStudentsByRole = async (req, res) => {
 
     try {
-        if (req.body.role === -1) {
+        if (req.body.role.includes(-1)) {
             const students = await student_model.getAllStudent();
 
             return res.json({ result: students });
         }
         else {
-            const students = await student_model.getStudentsByStateId(req.body.role);
+            const students = await student_model.getStudentsByStateIds(req.body.role);
             return res.json({ result: students });
         }
     }
@@ -220,8 +220,9 @@ let deleteStudent = async (req, res) => {
 }
 let getBystate = async (req, res) => {
     try {
-        let stateId = req.params.stateId;
-        const students = await student_model.getStudentsByStateId(stateId);
+        let stateId = parseInt(req.params.stateId);
+
+        const students = await student_model.getStudentsByStateIds([stateId]);
         
         return res.json({ result: students });
     }

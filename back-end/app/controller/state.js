@@ -18,13 +18,13 @@ let getAllState = async (req, res) => {
 }
 let getStatesByRole = async (req, res) => {
     try {
-        if (req.body.role === -1) {
+        if (req.body.role.includes(-1)) {
             const item = await state_model.getAllState();
             return res.json({ result: item });
         }
         else {
-            const item = await state_model.findStateById(req.body.role);
-            return res.json({ result: [item] });
+            const item = await state_model.findStatesByIds(req.body.role);
+            return res.json({ result: item });
         }
     }
     catch (error) {
