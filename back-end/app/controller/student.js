@@ -34,6 +34,18 @@ let createStudent = async (req, res) => {
         let year = date_ob.getFullYear();
 
         let created_at = year + "-" + month + "-" + date;
+        if (data.first_ins_date == '') {
+            data.first_ins_date = created_at;
+        }
+        if (data.second_ins_date == '') {
+            data.second_ins_date = created_at;
+        }
+        if (data.third_ins_date == '') {
+            data.third_ins_date = created_at;
+        }
+        if (data.forth_ins_date == '') {
+            data.forth_ins_date = created_at;
+        }
         let student= await student_model.createStudent(
             {
                 state_id: data.stateId,
@@ -51,6 +63,14 @@ let createStudent = async (req, res) => {
                 second_installment: data.secondInstallment,
                 third_installment: data.thirdInstallment,
                 forth_installment: data.forthInstallment,
+                first_ins_date: data.first_ins_date,
+                first_ins_invoice: data.first_ins_invoice,
+                second_ins_date: data.second_ins_date,
+                second_ins_invoice: data.second_ins_invoice,
+                third_ins_date: data.third_ins_date,
+                third_ins_invoice: data.third_ins_invoice,
+                forth_ins_date: data.forth_ins_date,
+                forth_ins_invoice: data.forth_ins_invoice,
                 remain_amount: data.remaining,
                 notes: data.notes,
                 created_at
@@ -132,7 +152,56 @@ let updateStudent = async (req, res) => {
     let data = req.body;
     console.log('edited', data);
     delete data.confirmCode;
-    let modifiedData = {id: data.id, name: data.name, school: data.school, branch: data.branch, governorate: data.governorate, institute: data.institute, phone: data.phone, poster: data.poster, code: data.code, identification: data.identification, notes: data.notes, state_id: data.stateId, first_installment: data.firstInstallment, second_installment: data.secondInstallment, third_installment: data.thirdInstallment, forth_installment: data.forthInstallment, total_amount: data.totalAmount, remain_amount: data.remaining };
+    let date_ob = new Date();
+    let date = ("0" + date_ob.getDate()).slice(-2);
+
+    // current month
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+    // current year
+    let year = date_ob.getFullYear();
+
+    let created_at = year + "-" + month + "-" + date;
+    if (data.first_ins_date == '') {
+        data.first_ins_date = created_at;
+    }
+    if (data.second_ins_date == '') {
+        data.second_ins_date = created_at;
+    }
+    if (data.third_ins_date == '') {
+        data.third_ins_date = created_at;
+    }
+    if (data.forth_ins_date == '') {
+        data.forth_ins_date = created_at;
+    }
+    let modifiedData = {
+        id: data.id,
+        name: data.name,
+        school: data.school,
+        branch: data.branch,
+        governorate: data.governorate,
+        institute: data.institute,
+        phone: data.phone,
+        poster: data.poster,
+        code: data.code,
+        identification: data.identification,
+        notes: data.notes,
+        state_id: data.stateId,
+        first_installment: data.firstInstallment,
+        second_installment: data.secondInstallment,
+        third_installment: data.thirdInstallment,
+        forth_installment: data.forthInstallment,
+        first_ins_date: data.first_ins_date,
+        first_ins_invoice: data.first_ins_invoice,
+        second_ins_date: data.second_ins_date,
+        second_ins_invoice: data.second_ins_invoice,
+        third_ins_date: data.third_ins_date,
+        third_ins_invoice: data.third_ins_invoice,
+        forth_ins_date: data.forth_ins_date,
+        forth_ins_invoice: data.forth_ins_invoice,
+        total_amount: data.totalAmount,
+        remain_amount: data.remaining
+    };
 
     await student_model.updateStudent(modifiedData);
     return res.json({ message: 'Success' });

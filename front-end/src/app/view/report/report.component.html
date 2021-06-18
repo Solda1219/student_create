@@ -19,13 +19,71 @@
                 <option [value]="state?.id" *ngFor="let state of states">{{state?.state_name}}</option>
             </select>
         </div>
-        <div class="col-sm-3 col-md-3"></div>
+        <div class="col-sm-3 col-md-3 row" >
+
+            <div class= "col-sm-4 col-md-4 p-2">Invoice Number:</div> 
+            <div class="form-group col-sm-4 col-md-4 p-2">
+                <input type="number" (change)= "setInvMin($event)" id="inv_min" name="inv_min" class="form-control">
+            </div>
+            <div class="form-group col-sm-4 col-md-4 p-2">
+                <input type="number" (change)= "setInvMax($event)" id="inv_max" name="inv_max" class="form-control">
+            </div>
+        </div>
+        <div class= "col-md-1 col-sm-1"></div>
         <div class="col-sm-1 col-6 col-md-1 p-1">
             <button type="button" (click)="download()" class="btn btn-block btn-primary">Download</button>
         </div>
         <div class="col-sm-1 col-6 col-md-1 p-1">
             <button type="button" (click)= "print()" class="btn btn-block btn-primary">Print</button>
         </div>
+        <mat-form-field class="col-sm-3 col-6 col-md-3" appearance="fill">
+            <mat-label>Enter a first date range</mat-label>
+            <mat-date-range-input [formGroup]="rangeFirst" [rangePicker]="pickerFirst">
+                <input (dateInput)="dateFirstMin('input', $event)" (dateChange)="dateFirstMin('change', $event)" matStartDate formControlName="startFirst" placeholder="Start date">
+                <input (dateInput)="dateFirstMax('input', $event)" (dateChange)="dateFirstMax('change', $event)" matEndDate formControlName="endFirst" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="pickerFirst"></mat-datepicker-toggle>
+            <mat-date-range-picker #pickerFirst></mat-date-range-picker>
+        
+            <mat-error *ngIf="rangeFirst.controls.startFirst.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+            <mat-error *ngIf="rangeFirst.controls.endFirst.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-3 col-6 col-md-3" appearance="fill">
+            <mat-label>Enter a second date range</mat-label>
+            <mat-date-range-input [formGroup]="rangeSecond" [rangePicker]="pickerSecond">
+                <input (dateInput)="dateSecondMin('input', $event)" (dateChange)="dateSecondMin('change', $event)" matStartDate formControlName="startSecond" placeholder="Start date">
+                <input (dateInput)="dateSecondMax('input', $event)" (dateChange)="dateSecondMax('change', $event)" matEndDate formControlName="endSecond" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="pickerSecond"></mat-datepicker-toggle>
+            <mat-date-range-picker #pickerSecond></mat-date-range-picker>
+        
+            <mat-error *ngIf="rangeSecond.controls.startSecond.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+            <mat-error *ngIf="rangeSecond.controls.endSecond.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-3 col-6 col-md-3" appearance="fill">
+            <mat-label>Enter a third date range</mat-label>
+            <mat-date-range-input [formGroup]="rangeThird" [rangePicker]="pickerThird">
+                <input (dateInput)="dateThirdMin('input', $event)" (dateChange)="dateThirdMin('change', $event)" matStartDate formControlName="startThird" placeholder="Start date">
+                <input (dateInput)="dateThirdMax('input', $event)" (dateChange)="dateThirdMax('change', $event)" matEndDate formControlName="endThird" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="pickerThird"></mat-datepicker-toggle>
+            <mat-date-range-picker #pickerThird></mat-date-range-picker>
+        
+            <mat-error *ngIf="rangeThird.controls.startThird.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+            <mat-error *ngIf="rangeThird.controls.endThird.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-3 col-6 col-md-3" appearance="fill">
+            <mat-label>Enter a forth date range</mat-label>
+            <mat-date-range-input [formGroup]="rangeForth" [rangePicker]="pickerForth">
+                <input (dateInput)="dateForthMin('input', $event)" (dateChange)="dateForthMin('change', $event)" matStartDate formControlName="startForth" placeholder="Start date">
+                <input (dateInput)="dateForthMax('input', $event)" (dateChange)="dateForthMax('change', $event)" matEndDate formControlName="endForth" placeholder="End date">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="pickerForth"></mat-datepicker-toggle>
+            <mat-date-range-picker #pickerForth></mat-date-range-picker>
+        
+            <mat-error *ngIf="rangeForth.controls.startForth.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+            <mat-error *ngIf="rangeForth.controls.endForth.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+        </mat-form-field>
         <div class= "col-sm-2 col-6 col-md-2 row p-1 ml-2">
             <label class="col-md-5 col-form-label p-1" for="total">Total sum:</label>
             <div class="col-md-7 p-1">

@@ -39,9 +39,18 @@ export class StudentCreateComponent implements OnInit {
       identification: [''],
       notes: [''],
       firstInstallment: [0],
+      first_ins_date: [''],
+      first_ins_invoice: ['0'],
       secondInstallment: [0],
+      second_ins_date: [''],
+      second_ins_invoice: ['0'],
+      
       thirdInstallment: [0],
+      third_ins_date: [''],
+      third_ins_invoice: ['0'],
       forthInstallment: [0],
+      forth_ins_date: [''],
+      forth_ins_invoice: ['0'],
       remaining: [0],
       totalAmount: [0]
     });

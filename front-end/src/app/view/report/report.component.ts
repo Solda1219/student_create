@@ -24,6 +24,22 @@ export class ReportComponent implements AfterViewInit, OnInit {
     start: new FormControl(),
     end: new FormControl()
   });
+  rangeFirst= new FormGroup({
+    startFirst: new FormControl(),
+    endFirst: new FormControl()
+  });
+  rangeSecond= new FormGroup({
+    startSecond: new FormControl(),
+    endSecond: new FormControl()
+  });
+  rangeThird= new FormGroup({
+    startThird: new FormControl(),
+    endThird: new FormControl()
+  });
+  rangeForth= new FormGroup({
+    startForth: new FormControl(),
+    endForth: new FormControl()
+  })
   totalData = [];
   states = [];
   totalSum = 0;
@@ -36,11 +52,17 @@ export class ReportComponent implements AfterViewInit, OnInit {
   reportFilterData = {
     minDate: 0,
     maxDate: 100000000000000,
+    minFirstDate: 0,
+    maxFirstDate: 100000000000000,
+    minSecondDate: 0,
+    maxSecondDate: 100000000000000,
+    minThirdDate: 0,
+    maxThirdDate: 100000000000000,
+    minForthDate: 0,
+    maxForthDate: 100000000000000,
     state: 0,
-    minTotal: 0,
-    maxTotal: 10000000,
-    minRemain: 0,
-    maxRemain: 10000000,
+    minInv: 0,
+    maxInv: 10000000,
   };
   stateId = 0;
   loading = true;
@@ -148,75 +170,178 @@ export class ReportComponent implements AfterViewInit, OnInit {
     let state = 0;
     let minDate = 0;
     let maxDate = 1000000000000000;
-    let minTotal = 0;
-    let maxTotal = 1000000;
-    let minRemain = 0;
-    let maxRemain = 1000000;
-    if (this.reportFilterData.minDate+"-0-0") {
+    let minFirstDate = 0;
+    let maxFirstDate = 1000000000000000;
+    let minSecondDate = 0;
+    let maxSecondDate = 1000000000000000;
+    let minThirdDate = 0;
+    let maxThirdDate = 1000000000000000;
+    let minForthDate = 0;
+    let maxForthDate = 1000000000000000;
+    let minInv = 0;
+    let maxInv = 1000000;
+    if (this.reportFilterData.minDate) {
       minDate = this.reportFilterData.minDate;
     }
-    if (this.reportFilterData.maxDate+ "24-59") {
+    if (this.reportFilterData.maxDate) {
       maxDate = this.reportFilterData.maxDate;
     }
-    if (this.reportFilterData.minTotal) {
-      minTotal = this.reportFilterData.minTotal;
+    if (this.reportFilterData.minFirstDate) {
+      minFirstDate = this.reportFilterData.minFirstDate;
     }
-    if (this.reportFilterData.maxTotal) {
-      maxTotal = this.reportFilterData.maxTotal;
+    if (this.reportFilterData.maxFirstDate) {
+      maxFirstDate = this.reportFilterData.maxFirstDate;
     }
-    if (this.reportFilterData.minRemain) {
-      minRemain = this.reportFilterData.minRemain;
+    if (this.reportFilterData.minSecondDate) {
+      minSecondDate = this.reportFilterData.minSecondDate;
     }
-    if (this.reportFilterData.maxRemain) {
-      maxRemain = this.reportFilterData.maxRemain;
+    if (this.reportFilterData.maxSecondDate) {
+      maxSecondDate = this.reportFilterData.maxSecondDate;
+    }
+    if (this.reportFilterData.minThirdDate) {
+      minThirdDate = this.reportFilterData.minThirdDate;
+    }
+    if (this.reportFilterData.maxThirdDate) {
+      maxThirdDate = this.reportFilterData.maxThirdDate;
+    }
+    if (this.reportFilterData.minForthDate) {
+      minForthDate = this.reportFilterData.minForthDate;
+    }
+    if (this.reportFilterData.maxForthDate) {
+      maxForthDate = this.reportFilterData.maxForthDate;
+    }
+    if (this.reportFilterData.minInv) {
+      minInv = this.reportFilterData.minInv;
+    }
+    if (this.reportFilterData.maxInv) {
+      maxInv = this.reportFilterData.maxInv;
     }
     if (this.reportFilterData.state) {
       state = this.reportFilterData.state;
     }
     let filteredData= allData.filter(one => {
-      var someDate = new Date(one.created_at);
+      var someDate = new Date(this.getTypedDate(one.created_at));
       var createdAt = someDate.getTime();
-      if ((state==0||state == one.state_id) && (minDate <= createdAt && createdAt <= maxDate) && (minTotal <= one.total_amount && one.total_amount <= maxTotal) && (minRemain <= one.remain_amount && one.remain_amount <= maxRemain)) {
+      console.log("createdAt", createdAt);
+      var firstDate= new Date(this.getTypedDate(one.first_ins_date));
+      var firstInsDate= firstDate.getTime();
+      var secondDate= new Date(this.getTypedDate(one.second_ins_date));
+      var secondInsDate= secondDate.getTime();
+      var thirdDate= new Date(this.getTypedDate(one.third_ins_date));
+      var thirdInsDate= thirdDate.getTime();
+      var forthDate= new Date(this.getTypedDate(one.forth_ins_date));
+      var forthInsDate= forthDate.getTime();
+      if ((state==0||state == one.state_id) && (minDate <= createdAt && createdAt <= maxDate) &&(minFirstDate <=firstInsDate&&firstInsDate<= maxFirstDate)&&(minSecondDate <= secondInsDate&& secondInsDate<= maxSecondDate)&&(minThirdDate <= thirdInsDate&& thirdInsDate<= maxThirdDate)&&(minForthDate <= forthInsDate&& forthInsDate<= maxForthDate) && ((minInv <= parseInt(one.first_ins_invoice) && parseInt(one.first_ins_invoice) <= maxInv)||(minInv <= parseInt(one.second_ins_invoice) && parseInt(one.second_ins_invoice) <= maxInv)||(minInv <= parseInt(one.third_ins_invoice) && parseInt(one.third_ins_invoice) <= maxInv)||(minInv <= parseInt(one.forth_ins_invoice) && parseInt(one.forth_ins_invoice) <= maxInv)) ) {
         return true;
       }
+      // if ((state==0||state == one.state_id) && (minDate <= createdAt && createdAt <= maxDate) && ((minInv <= parseInt(one.first_ins_invoice) && parseInt(one.first_ins_invoice) <= maxInv)||(minInv <= parseInt(one.second_ins_invoice) && parseInt(one.second_ins_invoice) <= maxInv)||(minInv <= parseInt(one.third_ins_invoice) && parseInt(one.third_ins_invoice) <= maxInv)||(minInv <= parseInt(one.forth_ins_invoice) && parseInt(one.forth_ins_invoice) <= maxInv)) ) {
+      //   return true;
+      // }
     });
+    console.log("filteredData", filteredData);
     this.dataSource.data = filteredData;
     this.setSum();
   }
+  getTypedDate(dateStr){
+    let date_ob = new Date(dateStr);
+    let date = ("0" + date_ob.getDate()).slice(-2);
+
+    // current month
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+    // current year
+    let year = date_ob.getFullYear();
+
+    let result = year + "-" + month + "-" + date;
+    console.log("result", result);
+    return result;
+
+  }
   dateMin(type: string, event: MatDatepickerInputEvent<Date>) {
-    var someDate = new Date(event.value);
-    let epdate = someDate.getTime();
+    var someDate = this.getTypedDate(event.value);
+    let modified= new Date(someDate);
+
+    let epdate = modified.getTime();
+    console.log("dateMin", epdate);
     this.reportFilterData = { ...this.reportFilterData, minDate: epdate };
     this.applyFilter();
   }
   dateMax(type: string, event: MatDatepickerInputEvent<Date>) {
-    var someDate = new Date(event.value);
-    let epdate = someDate.getTime();
+    var someDate = this.getTypedDate(event.value);
+    let modified= new Date(someDate);
+    let epdate = modified.getTime();
+    console.log("max", epdate);
     this.reportFilterData = { ...this.reportFilterData, maxDate: epdate };
+    this.applyFilter();
+  }
+  dateFirstMin(type: string, event: MatDatepickerInputEvent<Date>) {
+    var someDate = this.getTypedDate(event.value);
+    var modified = new Date(someDate);
+    let epdate = modified.getTime();
+    this.reportFilterData = { ...this.reportFilterData, minFirstDate: epdate };
+    this.applyFilter();
+  }
+  dateFirstMax(type: string, event: MatDatepickerInputEvent<Date>) {
+    var someDate = this.getTypedDate(event.value);
+    var modified = new Date(someDate);
+    let epdate = modified.getTime();
+    this.reportFilterData = { ...this.reportFilterData, maxFirstDate: epdate };
+    this.applyFilter();
+  }
+  dateSecondMin(type: string, event: MatDatepickerInputEvent<Date>) {
+    var someDate = this.getTypedDate(event.value);
+    var modified = new Date(someDate);
+    let epdate = modified.getTime();
+    this.reportFilterData = { ...this.reportFilterData, minSecondDate: epdate };
+    this.applyFilter();
+  }
+  dateSecondMax(type: string, event: MatDatepickerInputEvent<Date>) {
+    var someDate = this.getTypedDate(event.value);
+    var modified = new Date(someDate);
+    let epdate = modified.getTime();
+    this.reportFilterData = { ...this.reportFilterData, maxSecondDate: epdate };
+    this.applyFilter();
+  }
+  dateThirdMin(type: string, event: MatDatepickerInputEvent<Date>) {
+    var someDate = this.getTypedDate(event.value);
+    var modified = new Date(someDate);
+    let epdate = modified.getTime();
+    this.reportFilterData = { ...this.reportFilterData, minThirdDate: epdate };
+    this.applyFilter();
+  }
+  dateThirdMax(type: string, event: MatDatepickerInputEvent<Date>) {
+    var someDate = this.getTypedDate(event.value);
+    var modified = new Date(someDate);
+    let epdate = modified.getTime();
+    this.reportFilterData = { ...this.reportFilterData, maxThirdDate: epdate };
+    this.applyFilter();
+  }
+  dateForthMin(type: string, event: MatDatepickerInputEvent<Date>) {
+    var someDate = this.getTypedDate(event.value);
+    var modified = new Date(someDate);
+    let epdate = modified.getTime();
+    this.reportFilterData = { ...this.reportFilterData, minForthDate: epdate };
+    this.applyFilter();
+  }
+  dateForthMax(type: string, event: MatDatepickerInputEvent<Date>) {
+    var someDate = this.getTypedDate(event.value);
+    var modified = new Date(someDate);
+    let epdate = modified.getTime();
+    this.reportFilterData = { ...this.reportFilterData, maxForthDate: epdate };
     this.applyFilter();
   }
   stateChange(event) {
     this.reportFilterData = { ...this.reportFilterData, state: parseInt(event.target.value.trim()) };
     this.applyFilter();
   }
-  totalMin(event) {
-    let minTotal = parseInt(event.target.value.trim());
-    this.reportFilterData = { ...this.reportFilterData, minTotal: minTotal };
+  setInvMin(event) {
+    let minInv = parseInt(event.target.value.trim());
+    this.reportFilterData = { ...this.reportFilterData, minInv: minInv };
     this.applyFilter();
   }
-  totalMax(event) {
-    let maxTotal = parseInt(event.target.value.trim());
-    this.reportFilterData = { ...this.reportFilterData, maxTotal: maxTotal };
-    this.applyFilter();
-  }
-  remainMin(event) {
-    let minRemain = parseInt(event.target.value.trim());
-    this.reportFilterData = { ...this.reportFilterData, minRemain: minRemain };
-    this.applyFilter();
-  }
-  remainMax(event) {
-    let maxRemain = parseInt(event.target.value.trim());
-    this.reportFilterData = { ...this.reportFilterData, maxRemain: maxRemain };
+  setInvMax(event) {
+    let maxInv = parseInt(event.target.value.trim());
+    this.reportFilterData = { ...this.reportFilterData, maxInv: maxInv };
     this.applyFilter();
   }
   public download():void {
