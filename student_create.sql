@@ -25,17 +25,13 @@ CREATE TABLE `states` (
   `state_name` varchar(100) NOT NULL,
   `governorate` varchar(100) DEFAULT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `states` */
 
 insert  into `states`(`id`,`state_name`,`governorate`) values 
-(1,'edited','edit'),
-(7,'asdfssss','asdf'),
-(8,'sdfsdfdf','sdfsdf'),
-(9,'sdsdsd','sdsfsdf'),
-(10,'new state','governorate name of this state'),
-(11,'New stae','new gove');
+(19,'state_1','gov_1'),
+(20,'state_2','gov_2');
 
 /*Table structure for table `students` */
 
@@ -61,24 +57,24 @@ CREATE TABLE `students` (
   `remain_amount` int(11) DEFAULT NULL,
   `notes` longtext DEFAULT NULL,
   `created_at` date DEFAULT NULL,
+  `first_ins_date` varchar(20) DEFAULT NULL,
+  `first_ins_invoice` int(11) DEFAULT NULL,
+  `second_ins_date` varchar(20) DEFAULT NULL,
+  `second_ins_invoice` int(11) DEFAULT NULL,
+  `third_ins_date` varchar(20) DEFAULT NULL,
+  `third_ins_invoice` int(11) DEFAULT NULL,
+  `forth_ins_date` varchar(20) DEFAULT NULL,
+  `forth_ins_invoice` int(11) DEFAULT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `students` */
 
-insert  into `students`(`id`,`state_id`,`name`,`school`,`branch`,`governorate`,`institute`,`phone`,`poster`,`code`,`identification`,`total_amount`,`first_installment`,`second_installment`,`third_installment`,`forth_installment`,`remain_amount`,`notes`,`created_at`) values 
-(1,1,'asdf','asdf','asdf','asdf','asdfasfd','asdf','Gold Poster','asdf','asdf',0,0,0,0,0,0,'',NULL),
-(2,1,'asdfss','asdfsdf','sdfsdf','sdfsdf','sdfsdf','asdfsdf','Green Poster','asdfasdf','asfd',0,0,0,0,0,0,'',NULL),
-(5,2,'asdfsdfasdfa','asdfsdfsdfsdf','sdfsdfsdf','sdfsdfsdf','sdfsdfsdf','123123123123','Green Poster','asdfasfd','asdfasdfsdf',0,0,0,0,0,0,'',NULL),
-(9,1,'asfdasfdsdfsdf','sdfsdfsdfsdf','sdfsdfsfdsf','sdfsdfsdfs','sdfsfsf','12123232','','asdfasdf','asdfasdf',0,0,0,0,0,0,'',NULL),
-(11,1,'datedasdf','asdfdasd','sadf23','asdfsadf','asdfsadf','1231232','','','',0,0,0,121,0,0,'','2021-06-12'),
-(12,1,'asdfsfd','remain_correct?','asdfasfd','asdfsfd','asdfasfd','','','','',123,12,10,0,0,NULL,'','2021-06-12'),
-(13,1,'remain_corr','dfdfd','asdf','asdf','asdf','','','','',123,12,0,23,0,NULL,'','2021-06-12'),
-(14,1,'asdfasf','sreee','sdfsdf','sdf','sfdsdf','','','','',123,22,11,0,3,NULL,'','2021-06-12'),
-(15,1,'asfdasfd','asdfasfd','asdfsfd','asfsadf','asfasdf','','','','',122,2,2,0,0,NULL,'','2021-06-12'),
-(16,1,'sadfsdf','asdfsadf','asdfsdf','asdfsadf','asdfasdf','','','','',1230,12,21,0,1,NULL,'','2021-06-12'),
-(17,1,'asdfasdf','sdfsdf','sdfsdf','sdfsdf','sdfsdf','','','','',0,0,0,0,0,0,'','2021-06-12'),
-(18,1,'asdfasdfsdfsf','sdfsdf','ssdfsdfdf','sdfsdf','sdfsdf','','','','',123,22,12,0,0,89,'','2021-06-12');
+insert  into `students`(`id`,`state_id`,`name`,`school`,`branch`,`governorate`,`institute`,`phone`,`poster`,`code`,`identification`,`total_amount`,`first_installment`,`second_installment`,`third_installment`,`forth_installment`,`remain_amount`,`notes`,`created_at`,`first_ins_date`,`first_ins_invoice`,`second_ins_date`,`second_ins_invoice`,`third_ins_date`,`third_ins_invoice`,`forth_ins_date`,`forth_ins_invoice`) values 
+(28,19,'student_1_gov_1','school1','branch1','gov_1','asdf','asfd','Green Poster','asdfsfd','asfsfd',0,0,0,0,0,0,'','2021-06-18','2021-06-18',0,'2021-06-18',0,'2021-06-18',0,'2021-06-18',0),
+(29,19,'student_2_gov_2','shool1','brabch1','gov_1','asdf','sdfsfd','Green Poster','','',0,0,0,0,0,0,'','2021-06-18','2021-06-18',0,'2021-06-18',0,'2021-06-18',0,'2021-06-18',0),
+(30,20,'student1_state_2','sholl_state_2','branch2','gov_2','asdfasdf','23234234','Gold Poster','','',0,0,0,0,0,0,'','2021-06-18','2021-06-18',0,'2021-06-18',0,'2021-06-18',0,'2021-06-18',0),
+(31,20,'studnet2_state_2','school2','branch3','gov_2','asdfasf','sadf','','','',0,0,0,0,0,0,'','2021-06-18','2021-06-18',0,'2021-06-18',0,'2021-06-18',0,'2021-06-18',0);
 
 /*Table structure for table `user` */
 
@@ -92,12 +88,13 @@ CREATE TABLE `user` (
   `role_name` varchar(50) DEFAULT NULL,
   `password` varchar(200) NOT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `user` */
 
 insert  into `user`(`id`,`email`,`name`,`role`,`role_name`,`password`) values 
-(1,'admin@admin.com','Saul',1,'admin','$2a$12$4XUbNDjCFdh1/Uid5m.s0..btqNbKUlmWmXV7iFQts/OWCVHl2AFq');
+(1,'admin@admin.com','Saul',-1,'super','$2a$12$4XUbNDjCFdh1/Uid5m.s0..btqNbKUlmWmXV7iFQts/OWCVHl2AFq'),
+(4,'new@admin.com','newadmin',3,'user','$2a$12$SfVYHKTMIpxywzvoGqS0WeR9k3YuEKz9BfWqWOPV9NnwC6r6BdCfO');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
