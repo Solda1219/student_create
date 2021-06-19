@@ -19,7 +19,9 @@ let createStudent = async (req, res) => {
     try {
         
         const data = req.body;
-        console.log(data.stateId)
+        const studentexist = await student_model.getStudentByName(data.name);
+        if (studentexist) return res.status(400).json({ message: 'Already exist student with that name.' });
+        console.log("studentexist", studentexist);
         const state = await state_model.findStatesByIds([data.stateId]);
         if (!state) return res.status(400).json({
             message: 'There is no state for that.'
@@ -150,7 +152,8 @@ let getStudentsByRole = async (req, res) => {
 
 let updateStudent = async (req, res) => {
     let data = req.body;
-    console.log('edited', data);
+    // const studentexist = await student_model.getStudentByName(data.name);
+    // if (studentexist) return res.status(400).json({ message: 'There is already student with that name.' });
     delete data.confirmCode;
     let date_ob = new Date();
     let date = ("0" + date_ob.getDate()).slice(-2);

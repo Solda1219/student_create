@@ -42,13 +42,13 @@ export class StateComponent implements OnInit {
 
     this.formGroup = this._formBuilder.group({
       name: ['', Validators.required],
-      governorate: ['', Validators.required],
+      // governorate: ['', Validators.required],
     });
 
     this.formEditGroup = this._formBuilder.group({
       id: [0, Validators.required],
       name: ['', Validators.required],
-      governorate: ['', Validators.required],
+      // governorate: ['', Validators.required],
     });
     this.userService.postRequest('_api/state/getStatesByRole',{role: this.role}, true).subscribe(
       res => {
@@ -101,7 +101,7 @@ export class StateComponent implements OnInit {
   }
   stateEdit(state) {
     this.editedStateId = state.id;
-    this.formEditGroup.setValue({ id: state.id, name: state.state_name, governorate: state.governorate });
+    this.formEditGroup.setValue({ id: state.id, name: state.state_name });
     this.stateEditModal.show();
   }
   updateState() {

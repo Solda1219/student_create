@@ -37,6 +37,19 @@ let getStudentsByStateIds = async (stateIds) => {
     }
 }
 
+let getStudentByName = async (nameData) => {
+
+        const item = await query.get(studenttable, '*', `WHERE name ='${nameData}'`);
+        console.log(item);
+        if (item.length > 0) {
+            return item[0];
+        }
+        else {
+            return false;
+        }
+
+}
+
 let getStudentsByIds = async (ids) => {
     let students = [];
     try {
@@ -109,5 +122,6 @@ module.exports = {
     deleteStudent,
     getAllStudent,
     getStudentsByStateIds,
-    deleteStudentsByStateId
+    deleteStudentsByStateId,
+    getStudentByName
 }

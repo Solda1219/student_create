@@ -350,7 +350,7 @@ export class ReportComponent implements AfterViewInit, OnInit {
     let data = document.getElementById('pdfData');
     
     html2canvas(data, {
-        scrollX: 130,
+        scrollX: -110,
         scrollY: -10
       }).then(canvas => {
         
