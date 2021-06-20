@@ -49,11 +49,13 @@ export class ReportComponent implements AfterViewInit, OnInit {
   stateId = 0;
   loading = true;
   displayedColumns: string[] = [
+    'id',
     'name',
     'school',
     'governorate',
     'institute',
     'phone',
+    'phone_second',
     'poster',
     'code',
     'total_amount',

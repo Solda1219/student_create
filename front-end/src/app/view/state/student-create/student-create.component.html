@@ -20,9 +20,12 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="branch">Branch</label>
+            <label class="col-md-3 col-form-label" for="wipStatus">Branch</label>
             <div class="col-md-9">
-              <input class="form-control" id="branch" type="text" name="branch" placeholder="branch" formControlName="branch">
+              <select id="branch" name="branch" class="form-control" formControlName= "branch">
+                <option value="Biological">Biological</option>
+                <option value="Applied">Applied</option>
+              </select>
             </div>
           </div>
           <div class="form-group row">
@@ -41,6 +44,12 @@
             <label class="col-md-3 col-form-label" for="phone">Phone</label>
             <div class="col-md-9">
               <input class="form-control" id="phone" type="text" name="phone" placeholder="phone" formControlName="phone">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="phone_second">Phone Second</label>
+            <div class="col-md-9">
+              <input class="form-control" id="phone_second" type="text" name="phone_second" placeholder="phone_second" formControlName="phone_second">
             </div>
           </div>
           <div class="form-group row">

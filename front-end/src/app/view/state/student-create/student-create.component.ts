@@ -33,6 +33,7 @@ export class StudentCreateComponent implements OnInit {
       governorate: ['', Validators.required],
       institute: [''],
       phone: [''],
+      phone_second: [''],
       poster: [''],
       code: [''],
       confirmCode: [''],

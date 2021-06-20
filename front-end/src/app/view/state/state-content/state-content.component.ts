@@ -24,12 +24,14 @@ export class StateContentComponent implements AfterViewInit, OnInit {
   role= [];
   @ViewChild('studentDelModal') public studentDelModal: ModalDirective;
   displayedColumns: string[] = [
+    'id',
     'name',
     'school',
     'branch',
     'governorate',
     'institute',
     'phone',
+    'phone_second',
     'poster',
     'code',
     'identification',
