@@ -24,22 +24,10 @@ export class ReportComponent implements AfterViewInit, OnInit {
     start: new FormControl(),
     end: new FormControl()
   });
-  rangeFirst= new FormGroup({
-    startFirst: new FormControl(),
-    endFirst: new FormControl()
+  rangeInstallment= new FormGroup({
+    startInstallment: new FormControl(),
+    endInstallment: new FormControl()
   });
-  rangeSecond= new FormGroup({
-    startSecond: new FormControl(),
-    endSecond: new FormControl()
-  });
-  rangeThird= new FormGroup({
-    startThird: new FormControl(),
-    endThird: new FormControl()
-  });
-  rangeForth= new FormGroup({
-    startForth: new FormControl(),
-    endForth: new FormControl()
-  })
   totalData = [];
   states = [];
   totalSum = 0;
@@ -52,14 +40,8 @@ export class ReportComponent implements AfterViewInit, OnInit {
   reportFilterData = {
     minDate: 0,
     maxDate: 100000000000000,
-    minFirstDate: 0,
-    maxFirstDate: 100000000000000,
-    minSecondDate: 0,
-    maxSecondDate: 100000000000000,
-    minThirdDate: 0,
-    maxThirdDate: 100000000000000,
-    minForthDate: 0,
-    maxForthDate: 100000000000000,
+    minInstallmentDate: 0,
+    maxInstallmentDate: 100000000000000,
     state: 0,
     minInv: 0,
     maxInv: 10000000,
@@ -172,14 +154,8 @@ export class ReportComponent implements AfterViewInit, OnInit {
     let state = 0;
     let minDate = 0;
     let maxDate = 1000000000000000;
-    let minFirstDate = 0;
-    let maxFirstDate = 1000000000000000;
-    let minSecondDate = 0;
-    let maxSecondDate = 1000000000000000;
-    let minThirdDate = 0;
-    let maxThirdDate = 1000000000000000;
-    let minForthDate = 0;
-    let maxForthDate = 1000000000000000;
+    let minInstallmentDate = 0;
+    let maxInstallmentDate = 1000000000000000;
     let minInv = 0;
     let maxInv = 1000000;
     if (this.reportFilterData.minDate) {
@@ -188,29 +164,11 @@ export class ReportComponent implements AfterViewInit, OnInit {
     if (this.reportFilterData.maxDate) {
       maxDate = this.reportFilterData.maxDate;
     }
-    if (this.reportFilterData.minFirstDate) {
-      minFirstDate = this.reportFilterData.minFirstDate;
+    if (this.reportFilterData.minInstallmentDate) {
+      minInstallmentDate = this.reportFilterData.minInstallmentDate;
     }
-    if (this.reportFilterData.maxFirstDate) {
-      maxFirstDate = this.reportFilterData.maxFirstDate;
-    }
-    if (this.reportFilterData.minSecondDate) {
-      minSecondDate = this.reportFilterData.minSecondDate;
-    }
-    if (this.reportFilterData.maxSecondDate) {
-      maxSecondDate = this.reportFilterData.maxSecondDate;
-    }
-    if (this.reportFilterData.minThirdDate) {
-      minThirdDate = this.reportFilterData.minThirdDate;
-    }
-    if (this.reportFilterData.maxThirdDate) {
-      maxThirdDate = this.reportFilterData.maxThirdDate;
-    }
-    if (this.reportFilterData.minForthDate) {
-      minForthDate = this.reportFilterData.minForthDate;
-    }
-    if (this.reportFilterData.maxForthDate) {
-      maxForthDate = this.reportFilterData.maxForthDate;
+    if (this.reportFilterData.maxInstallmentDate) {
+      maxInstallmentDate = this.reportFilterData.maxInstallmentDate;
     }
     if (this.reportFilterData.minInv) {
       minInv = this.reportFilterData.minInv;
@@ -233,7 +191,7 @@ export class ReportComponent implements AfterViewInit, OnInit {
       var thirdInsDate= thirdDate.getTime();
       var forthDate= new Date(this.getTypedDate(one.forth_ins_date));
       var forthInsDate= forthDate.getTime();
-      if ((state==0||state == one.state_id) && (minDate <= createdAt && createdAt <= maxDate) &&(minFirstDate <=firstInsDate&&firstInsDate<= maxFirstDate)&&(minSecondDate <= secondInsDate&& secondInsDate<= maxSecondDate)&&(minThirdDate <= thirdInsDate&& thirdInsDate<= maxThirdDate)&&(minForthDate <= forthInsDate&& forthInsDate<= maxForthDate) && ((minInv <= parseInt(one.first_ins_invoice) && parseInt(one.first_ins_invoice) <= maxInv)||(minInv <= parseInt(one.second_ins_invoice) && parseInt(one.second_ins_invoice) <= maxInv)||(minInv <= parseInt(one.third_ins_invoice) && parseInt(one.third_ins_invoice) <= maxInv)||(minInv <= parseInt(one.forth_ins_invoice) && parseInt(one.forth_ins_invoice) <= maxInv)) ) {
+      if ((state==0||state == one.state_id) && (minDate <= createdAt && createdAt <= maxDate) &&((minInstallmentDate <=firstInsDate&&firstInsDate<= maxInstallmentDate)||(minInstallmentDate <= secondInsDate&& secondInsDate<= maxInstallmentDate)||(minInstallmentDate <= thirdInsDate&& thirdInsDate<= maxInstallmentDate)||(minInstallmentDate <= forthInsDate&& forthInsDate<= maxInstallmentDate)) && ((minInv <= parseInt(one.first_ins_invoice) && parseInt(one.first_ins_invoice) <= maxInv)||(minInv <= parseInt(one.second_ins_invoice) && parseInt(one.second_ins_invoice) <= maxInv)||(minInv <= parseInt(one.third_ins_invoice) && parseInt(one.third_ins_invoice) <= maxInv)||(minInv <= parseInt(one.forth_ins_invoice) && parseInt(one.forth_ins_invoice) <= maxInv)) ) {
         return true;
       }
       // if ((state==0||state == one.state_id) && (minDate <= createdAt && createdAt <= maxDate) && ((minInv <= parseInt(one.first_ins_invoice) && parseInt(one.first_ins_invoice) <= maxInv)||(minInv <= parseInt(one.second_ins_invoice) && parseInt(one.second_ins_invoice) <= maxInv)||(minInv <= parseInt(one.third_ins_invoice) && parseInt(one.third_ins_invoice) <= maxInv)||(minInv <= parseInt(one.forth_ins_invoice) && parseInt(one.forth_ins_invoice) <= maxInv)) ) {
@@ -276,60 +234,18 @@ export class ReportComponent implements AfterViewInit, OnInit {
     this.reportFilterData = { ...this.reportFilterData, maxDate: epdate };
     this.applyFilter();
   }
-  dateFirstMin(type: string, event: MatDatepickerInputEvent<Date>) {
+  dateInstallmentMin(type: string, event: MatDatepickerInputEvent<Date>) {
     var someDate = this.getTypedDate(event.value);
     var modified = new Date(someDate);
     let epdate = modified.getTime();
-    this.reportFilterData = { ...this.reportFilterData, minFirstDate: epdate };
+    this.reportFilterData = { ...this.reportFilterData, minInstallmentDate: epdate };
     this.applyFilter();
   }
-  dateFirstMax(type: string, event: MatDatepickerInputEvent<Date>) {
+  dateInstallmentMax(type: string, event: MatDatepickerInputEvent<Date>) {
     var someDate = this.getTypedDate(event.value);
     var modified = new Date(someDate);
     let epdate = modified.getTime();
-    this.reportFilterData = { ...this.reportFilterData, maxFirstDate: epdate };
-    this.applyFilter();
-  }
-  dateSecondMin(type: string, event: MatDatepickerInputEvent<Date>) {
-    var someDate = this.getTypedDate(event.value);
-    var modified = new Date(someDate);
-    let epdate = modified.getTime();
-    this.reportFilterData = { ...this.reportFilterData, minSecondDate: epdate };
-    this.applyFilter();
-  }
-  dateSecondMax(type: string, event: MatDatepickerInputEvent<Date>) {
-    var someDate = this.getTypedDate(event.value);
-    var modified = new Date(someDate);
-    let epdate = modified.getTime();
-    this.reportFilterData = { ...this.reportFilterData, maxSecondDate: epdate };
-    this.applyFilter();
-  }
-  dateThirdMin(type: string, event: MatDatepickerInputEvent<Date>) {
-    var someDate = this.getTypedDate(event.value);
-    var modified = new Date(someDate);
-    let epdate = modified.getTime();
-    this.reportFilterData = { ...this.reportFilterData, minThirdDate: epdate };
-    this.applyFilter();
-  }
-  dateThirdMax(type: string, event: MatDatepickerInputEvent<Date>) {
-    var someDate = this.getTypedDate(event.value);
-    var modified = new Date(someDate);
-    let epdate = modified.getTime();
-    this.reportFilterData = { ...this.reportFilterData, maxThirdDate: epdate };
-    this.applyFilter();
-  }
-  dateForthMin(type: string, event: MatDatepickerInputEvent<Date>) {
-    var someDate = this.getTypedDate(event.value);
-    var modified = new Date(someDate);
-    let epdate = modified.getTime();
-    this.reportFilterData = { ...this.reportFilterData, minForthDate: epdate };
-    this.applyFilter();
-  }
-  dateForthMax(type: string, event: MatDatepickerInputEvent<Date>) {
-    var someDate = this.getTypedDate(event.value);
-    var modified = new Date(someDate);
-    let epdate = modified.getTime();
-    this.reportFilterData = { ...this.reportFilterData, maxForthDate: epdate };
+    this.reportFilterData = { ...this.reportFilterData, maxInstallmentDate: epdate };
     this.applyFilter();
   }
   stateChange(event) {
