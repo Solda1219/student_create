@@ -83,10 +83,10 @@ export class ReportComponent implements AfterViewInit, OnInit {
     this.forthSum = 0;
     this.remainSum = 0;
     for (let i = 0; i < this.dataSource.data.length; i++){
-      if (this.dataSource.data[i]['total_amount']) {
+      // if (this.dataSource.data[i]['total_amount']) {
         
-        this.totalSum = this.totalSum+ parseInt(this.dataSource.data[i]['total_amount']);
-      }
+      //   this.totalSum = this.totalSum+ parseInt(this.dataSource.data[i]['total_amount']);
+      // }
       if (this.dataSource.data[i]['first_installment']) {
         console.log("come here?")
         this.firstSum = this.firstSum+ parseInt(this.dataSource.data[i]['first_installment']);
@@ -104,6 +104,7 @@ export class ReportComponent implements AfterViewInit, OnInit {
         this.remainSum = this.remainSum+ parseInt(this.dataSource.data[i]['remain_amount']);
       }
     }
+    this.totalSum = this.firstSum + this.secondSum + this.thirdSum + this.forthSum;
   }
   ngOnInit(): void{
     this.role= JSON.parse(this.userService.getToken().userInfo.role);
@@ -264,48 +265,18 @@ export class ReportComponent implements AfterViewInit, OnInit {
     this.reportFilterData = { ...this.reportFilterData, maxInv: maxInv };
     this.applyFilter();
   }
-  // public download():void {
-  //   let data = document.getElementById('printAll');
-    
-  //   html2canvas(data, {
-  //       scrollX: -199,
-  //       scrollY: -10
-  //     }).then(canvas => {
-        
-  //     const contentDataURL = canvas.toDataURL('image/png', 0.5)  
-  //     // var imgWidth = 200; 
-  //     // var pageHeight = 295;
-  //     var imgWidth = canvas.width; 
-  //     var pageHeight = canvas.height;  
-  //     var imgHeight = canvas.height * imgWidth / canvas.width;
-  //     var heightLeft = imgHeight;
-    
-  //     var doc = new jsPDF('l', 'mm', 'a4');
-  //     var position = 5;
-    
-  //     doc.addImage(contentDataURL, 'PNG', 3, position, Math.floor(imgWidth * 0.2326), Math.floor(pageHeight * 0.2326));
-    
-  //     heightLeft -= pageHeight;
-    
-  //     while (heightLeft >= 0) {
-  //       position = heightLeft - imgHeight;
-  //       doc.addPage();
-  //       doc.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-  //       heightLeft -= pageHeight;
-  //     }
-  //     doc.save( 'file.pdf');
-
-  //   });     
-  // }
   public download():void {
-    let data = document.getElementById('pdfData');
+    let data = document.getElementById('printSpe');
     
     html2canvas(data, {
-        scrollX: -110,
-        scrollY: -10
+        scrollX: -130,
+        // scrollY: 70,
+      x: -11,
+      scale: 1,
+        removeContainer:true
       }).then(canvas => {
         
-      const contentDataURL = canvas.toDataURL('image/png', 1.0)  
+      const contentDataURL = canvas.toDataURL('image/png')  
       // var imgWidth = 200; 
       // var pageHeight = 295;
       var imgWidth = canvas.width; 
@@ -330,6 +301,39 @@ export class ReportComponent implements AfterViewInit, OnInit {
 
     });     
   }
+  // public download():void {
+  //   let data = document.getElementById('pdfData');
+    
+  //   html2canvas(data, {
+  //       scrollX: -110,
+  //       scrollY: -10
+  //     }).then(canvas => {
+        
+  //     const contentDataURL = canvas.toDataURL('image/png', 1.0)  
+  //     // var imgWidth = 200; 
+  //     // var pageHeight = 295;
+  //     var imgWidth = canvas.width; 
+  //     var pageHeight = canvas.height;  
+  //     var imgHeight = canvas.height * imgWidth / canvas.width;
+  //     var heightLeft = imgHeight;
+    
+  //     var doc = new jsPDF('l', 'mm', 'a4');
+  //     var position = 5;
+    
+  //     doc.addImage(contentDataURL, 'PNG', 3, position, Math.floor(imgWidth * 0.2326), Math.floor(pageHeight * 0.2326));
+    
+  //     heightLeft -= pageHeight;
+    
+  //     while (heightLeft >= 0) {
+  //       position = heightLeft - imgHeight;
+  //       doc.addPage();
+  //       doc.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+  //       heightLeft -= pageHeight;
+  //     }
+  //     doc.save( 'file.pdf');
+
+  //   });     
+  // }
   public print(): void {
     let printContents, popupWin;
     printContents = document.getElementById('printEl').innerHTML;

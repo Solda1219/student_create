@@ -49,46 +49,49 @@
             <mat-error *ngIf="rangeInstallment.controls.endInstallment.hasError('matEndDateInvalid')">Invalid end date</mat-error>
         </mat-form-field>
         <div class= "col-md-9 col-sm-9"></div>
-        <div class= "col-sm-2 col-6 col-md-2 row p-1 ml-2">
-            <label class="col-md-5 col-form-label p-1" for="total">Total sum:</label>
-            <div class="col-md-7 p-1">
+    </div>
+    <span id= "printSpe" >
+    <div class= "row p-1" >
+        <div class= "col-sm-2 col-6 col-md-2 row p-0 m-0" >
+            <label class="col-md-5 " for="total">Total sum:</label>
+            <div class="col-md-7 ">
                 <input disabled class="form-control" id="total" type="number" name="total" [value]= "totalSum" placeholder="total">
             </div>
         </div>
-        <div class="col-sm-2 col-6 col-md-2 row p-1 ml-2">
-            <label class="col-md-5 col-form-label p-1" for="first">First sum:</label>
-            <div class="col-md-7 p-1">
+        <div class="col-sm-2 col-6 col-md-2 row p-0 m-0">
+            <label class="col-md-5 " for="first">First sum:</label>
+            <div class="col-md-7 ">
                 <input disabled class="form-control" id="first" type="number" name="first" [value]= "firstSum" placeholder="first" >
             </div>
         </div>
-        <div class="col-sm-2 col-6 col-md-2 row p-1 ml-2">
-            <label class="col-md-5 col-form-label p-1" for="second">Second sum:</label>
-            <div class="col-md-7 p-1">
+        <div class="col-sm-2 col-6 col-md-2 row p-0 m-0">
+            <label class="col-md-5 " for="second">Second sum:</label>
+            <div class="col-md-7 ">
                 <input disabled class="form-control" id="second" type="number" name="second" [value]= "secondSum" placeholder="second" >
             </div>
         </div>
-        <div class="col-sm-2 col-6 col-md-2 row p-1 ml-2">
-            <label class="col-md-5 col-form-label p-1" for="third">Third sum:</label>
-            <div class="col-md-7 p-1">
+        <div class="col-sm-2 col-6 col-md-2 row p-0 m-0">
+            <label class="col-md-5 " for="third">Third sum:</label>
+            <div class="col-md-7 ">
                 <input disabled class="form-control" id="third" type="number" name="third" [value]= "thirdSum" placeholder="third" >
             </div>
         </div>
-        <div class="col-sm-2 col-6 col-md-2 row p-1 ml-2">
-            <label class="col-md-5 col-form-label p-1" for="forth">Forth sum:</label>
-            <div class="col-md-7 p-1">
+        <div class="col-sm-2 col-6 col-md-2 row p-0 m-0">
+            <label class="col-md-5 " for="forth">Forth sum:</label>
+            <div class="col-md-7 ">
                 <input disabled class="form-control" id="forth" type="number" name="forth" [value]= "forthSum" placeholder="forth">
             </div>
         </div>
-        <div class="col-sm-2 col-6 col-md-2 row p-1 ml-2">
-            <label class="col-md-5 col-form-label p-1" for="remain">Remain sum:</label>
-            <div class="col-md-7 p-1">
+        <div class="col-sm-2 col-6 col-md-2 row p-0 m-0">
+            <label class="col-md-5 " for="remain">Remain sum:</label>
+            <div class="col-md-7 ">
                 <input disabled class="form-control" id="remain" type="number" name="remain" [value]= "remainSum" placeholder="remain">
             </div>
         </div>
         
     </div>
 
-    <div class="mat-elevation-z8" id= "printEl">
+    <div id= "printEl">
         <table mat-table [dataSource]="dataSource" matSort class= "p-1" id="pdfData" #pdfData >
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th> 
@@ -192,4 +195,5 @@
 
         <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator> -->
     </div>
+    </span>
 </div>
