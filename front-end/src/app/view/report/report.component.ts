@@ -264,6 +264,39 @@ export class ReportComponent implements AfterViewInit, OnInit {
     this.reportFilterData = { ...this.reportFilterData, maxInv: maxInv };
     this.applyFilter();
   }
+  // public download():void {
+  //   let data = document.getElementById('printAll');
+    
+  //   html2canvas(data, {
+  //       scrollX: -199,
+  //       scrollY: -10
+  //     }).then(canvas => {
+        
+  //     const contentDataURL = canvas.toDataURL('image/png', 0.5)  
+  //     // var imgWidth = 200; 
+  //     // var pageHeight = 295;
+  //     var imgWidth = canvas.width; 
+  //     var pageHeight = canvas.height;  
+  //     var imgHeight = canvas.height * imgWidth / canvas.width;
+  //     var heightLeft = imgHeight;
+    
+  //     var doc = new jsPDF('l', 'mm', 'a4');
+  //     var position = 5;
+    
+  //     doc.addImage(contentDataURL, 'PNG', 3, position, Math.floor(imgWidth * 0.2326), Math.floor(pageHeight * 0.2326));
+    
+  //     heightLeft -= pageHeight;
+    
+  //     while (heightLeft >= 0) {
+  //       position = heightLeft - imgHeight;
+  //       doc.addPage();
+  //       doc.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+  //       heightLeft -= pageHeight;
+  //     }
+  //     doc.save( 'file.pdf');
+
+  //   });     
+  // }
   public download():void {
     let data = document.getElementById('pdfData');
     
