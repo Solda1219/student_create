@@ -35,7 +35,6 @@ let getStatesByRole = async (req, res) => {
 }
 let createState = async (req, res) => {
     try {
-        console.log('zzz')
         const data = req.body;
         const exist = await state_model.existState(data.name);
         if (exist) return res.status(401).json({ message: 'This state aready exist.' });
@@ -57,7 +56,6 @@ let createState = async (req, res) => {
 let updateState = async (req, res) => {
     try {
         let data = req.body;
-        console.log('edited', data);
         let id = data.id;
         let modifiedData = {id: id, state_name: data.name, governorate: data.governorate };
 

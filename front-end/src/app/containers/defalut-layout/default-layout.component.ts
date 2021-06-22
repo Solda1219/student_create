@@ -88,7 +88,6 @@ export class DefaultLayoutComponent implements OnInit {
 
   },
 ];
-    console.log("this.nav", this.nav);
     this.curRoute=this.route.routerState.snapshot.url;
     this.user = this.userService.getToken()['userInfo'];
     document.getElementsByClassName("navbar-toggler-icon")[2]

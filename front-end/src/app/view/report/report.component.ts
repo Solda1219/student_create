@@ -54,8 +54,6 @@ export class ReportComponent implements AfterViewInit, OnInit {
     'school',
     'governorate',
     'institute',
-    'phone',
-    'phone_second',
     'poster',
     'code',
     'total_amount',
@@ -88,7 +86,7 @@ export class ReportComponent implements AfterViewInit, OnInit {
       //   this.totalSum = this.totalSum+ parseInt(this.dataSource.data[i]['total_amount']);
       // }
       if (this.dataSource.data[i]['first_installment']) {
-        console.log("come here?")
+      
         this.firstSum = this.firstSum+ parseInt(this.dataSource.data[i]['first_installment']);
       }
       if (this.dataSource.data[i]['second_installment']) {
@@ -114,11 +112,9 @@ export class ReportComponent implements AfterViewInit, OnInit {
         this.loading = false;
         
         this.totalData = res['result'];
-        console.log('totalData', this.totalData);
         this.dataSource.data = res['result'];
         // sumup
         this.setSum();
-        console.log(res['result']);
       },
       err => {
         console.log(err)
@@ -128,10 +124,8 @@ export class ReportComponent implements AfterViewInit, OnInit {
     );
     this.userService.postRequest('_api/state/getStatesByRole',{role: this.role}, true).subscribe(
       res => {
-        console.log(res['result'])
         let states = res['result'];
         this.states = states;
-        console.log(this.states)
       },
       err => {
         this.loading = false;
@@ -185,7 +179,6 @@ export class ReportComponent implements AfterViewInit, OnInit {
     let filteredData= allData.filter(one => {
       var someDate = new Date(this.getTypedDate(one.created_at));
       var createdAt = someDate.getTime();
-      console.log("createdAt", createdAt);
       var firstDate= new Date(this.getTypedDate(one.first_ins_date));
       var firstInsDate= firstDate.getTime();
       var secondDate= new Date(this.getTypedDate(one.second_ins_date));
@@ -194,14 +187,13 @@ export class ReportComponent implements AfterViewInit, OnInit {
       var thirdInsDate= thirdDate.getTime();
       var forthDate= new Date(this.getTypedDate(one.forth_ins_date));
       var forthInsDate= forthDate.getTime();
-      if ((state==0||state == one.state_id) && (minDate <= createdAt && createdAt <= maxDate) &&((minInstallmentDate <=firstInsDate&&firstInsDate<= maxInstallmentDate)||(minInstallmentDate <= secondInsDate&& secondInsDate<= maxInstallmentDate)||(minInstallmentDate <= thirdInsDate&& thirdInsDate<= maxInstallmentDate)||(minInstallmentDate <= forthInsDate&& forthInsDate<= maxInstallmentDate)) && ((minInv <= parseInt(one.first_ins_invoice) && parseInt(one.first_ins_invoice) <= maxInv)||(minInv <= parseInt(one.second_ins_invoice) && parseInt(one.second_ins_invoice) <= maxInv)||(minInv <= parseInt(one.third_ins_invoice) && parseInt(one.third_ins_invoice) <= maxInv)||(minInv <= parseInt(one.forth_ins_invoice) && parseInt(one.forth_ins_invoice) <= maxInv)) ) {
+      if ((state==0||state == one.state_id) && (minDate <= createdAt && createdAt <= maxDate) &&((minInstallmentDate <=firstInsDate&&firstInsDate<= maxInstallmentDate)||(minInstallmentDate <= secondInsDate&& secondInsDate<= maxInstallmentDate)||(minInstallmentDate <= thirdInsDate&& thirdInsDate<= maxInstallmentDate)||(minInstallmentDate <= forthInsDate&& forthInsDate<= maxInstallmentDate)) && ((minInv <= parseInt(one.first_ins_invoice) && parseInt(one.first_ins_invoice) <= maxInv)||(minInv <= parseInt(one.second_ins_invoice) && parseInt(one.second_ins_invoice) <= maxInv)||(minInv <= parseInt(one.third_ins_invoice) && parseInt(one.third_ins_invoice) <= maxInv)||(minInv <= parseInt(one.forth_ins_invoice) && parseInt(one.forth_ins_invoice) <= maxInv))&&(!(one.first_installment== null||one.first_installment== 0)||!(one.second_installment== null||one.second_installment== 0)||!(one.third_installment== null||one.third_installment== 0)||!(one.forth_installment== null||one.forth_installment== 0)) ) {
         return true;
       }
       // if ((state==0||state == one.state_id) && (minDate <= createdAt && createdAt <= maxDate) && ((minInv <= parseInt(one.first_ins_invoice) && parseInt(one.first_ins_invoice) <= maxInv)||(minInv <= parseInt(one.second_ins_invoice) && parseInt(one.second_ins_invoice) <= maxInv)||(minInv <= parseInt(one.third_ins_invoice) && parseInt(one.third_ins_invoice) <= maxInv)||(minInv <= parseInt(one.forth_ins_invoice) && parseInt(one.forth_ins_invoice) <= maxInv)) ) {
       //   return true;
       // }
     });
-    console.log("filteredData", filteredData);
     this.dataSource.data = filteredData;
     this.setSum();
   }
@@ -216,7 +208,6 @@ export class ReportComponent implements AfterViewInit, OnInit {
     let year = date_ob.getFullYear();
 
     let result = year + "-" + month + "-" + date;
-    console.log("result", result);
     return result;
 
   }
@@ -225,7 +216,6 @@ export class ReportComponent implements AfterViewInit, OnInit {
     let modified= new Date(someDate);
 
     let epdate = modified.getTime();
-    console.log("dateMin", epdate);
     this.reportFilterData = { ...this.reportFilterData, minDate: epdate };
     this.applyFilter();
   }
@@ -233,7 +223,6 @@ export class ReportComponent implements AfterViewInit, OnInit {
     var someDate = this.getTypedDate(event.value);
     let modified= new Date(someDate);
     let epdate = modified.getTime();
-    console.log("max", epdate);
     this.reportFilterData = { ...this.reportFilterData, maxDate: epdate };
     this.applyFilter();
   }
@@ -271,7 +260,7 @@ export class ReportComponent implements AfterViewInit, OnInit {
     html2canvas(data, {
         scrollX: -130,
         // scrollY: 70,
-      x: -11,
+      x: -1,
       scale: 1,
         removeContainer:true
       }).then(canvas => {

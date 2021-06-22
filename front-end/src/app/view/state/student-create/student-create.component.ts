@@ -69,10 +69,9 @@ export class StudentCreateComponent implements OnInit {
       return;
     }
     let remaining_amount = this.formGroup.value.totalAmount - this.formGroup.value.firstInstallment - this.formGroup.value.secondInstallment - this.formGroup.value.thirdInstallment - this.formGroup.value.forthInstallment;
-    console.log(remaining_amount);
+
     this.formGroup.patchValue({ remaining: remaining_amount });
     const studentData = this.formGroup.value;
-    console.log('studentData in create', studentData);
     this.userService.postRequest('_api/student/create', studentData, true).subscribe(
       res => {
         this.userService.handleSuccess("Student created successfully!");

@@ -93,7 +93,6 @@ let del = async (id) => {
 }
 let deleteAdmin = async (id) => {
     try {
-        console.log("come here?", id);
         const item = await query.del(table, `WHERE id = ${id}`);
         return true
     }

@@ -66,7 +66,7 @@ export class StateContentComponent implements AfterViewInit, OnInit {
       res => {
         this.loading = false;
         this.dataSource.data = res['result'];
-        console.log(res['result']);
+        
       },
       err => {
         console.log(err)
@@ -110,7 +110,7 @@ export class StateContentComponent implements AfterViewInit, OnInit {
           res => {
             this.loading = false;
             this.dataSource.data = res['result'];
-            console.log(res['result']);
+            
           },
           err => {
             console.log(err)

@@ -52,10 +52,8 @@ export class StateComponent implements OnInit {
     });
     this.userService.postRequest('_api/state/getStatesByRole',{role: this.role}, true).subscribe(
       res => {
-        console.log(res['result'])
         let states = res['result'];
         this.states = states;
-        console.log(this.states)
       },
       err => {
         this.loading = false;
@@ -77,7 +75,7 @@ export class StateComponent implements OnInit {
         this.loading = false;
         this.userService.getRequest('_api/state/all', true).subscribe(
           res => {
-            console.log(res['result'])
+            
             let states = res['result'];
             this.states = states;
             this.userService.handleSuccess('State created successfully!');
@@ -115,7 +113,7 @@ export class StateComponent implements OnInit {
       res => {
         this.userService.getRequest('_api/state/all', true).subscribe(
           res => {
-            console.log(res['result'])
+            
             let states = res['result'];
             this.states = states;
             this.userService.handleSuccess('State updated successfully!');
@@ -143,7 +141,7 @@ export class StateComponent implements OnInit {
       res => {
         this.userService.getRequest('_api/state/all', true).subscribe(
           res => {
-            console.log(res['result'])
+            
             let states = res['result'];
             this.states = states;
             this.userService.handleSuccess('State deleted successfully!');

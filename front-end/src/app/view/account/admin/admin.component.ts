@@ -64,7 +64,6 @@ export class AdminComponent implements AfterViewInit, OnInit {
     });
     this.userService.getRequest('_api/state/all', true).subscribe(
       res => {
-        console.log(res['result'])
         this.roles= this.roles.concat(res['result']);
       },
       err => {
@@ -75,8 +74,7 @@ export class AdminComponent implements AfterViewInit, OnInit {
     this.userService.getRequest('_api/account/admin/getAdmins', true).subscribe(
       res => {
         this.loading = false;
-        this.dataSource.data = res['result'];
-        console.log(res['result']);
+        this.dataSource.data = res['result'];;
       },
       err => {
         console.log(err)
@@ -169,7 +167,6 @@ export class AdminComponent implements AfterViewInit, OnInit {
       return;
     }
     let data = this.formEditGroup.value;
-    console.log(data);
     this.userService.postRequest('_api/account/admin/update', data, true).subscribe(
       res => {
         this.userService.getRequest('_api/account/admin/getAdmins', true).subscribe(

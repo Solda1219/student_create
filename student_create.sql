@@ -25,9 +25,13 @@ CREATE TABLE `states` (
   `state_name` varchar(100) NOT NULL,
   `governorate` varchar(100) DEFAULT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `states` */
+
+insert  into `states`(`id`,`state_name`,`governorate`) values 
+(1,'state_1',NULL),
+(2,'state_2',NULL);
 
 /*Table structure for table `students` */
 
@@ -62,10 +66,17 @@ CREATE TABLE `students` (
   `forth_ins_date` varchar(20) DEFAULT NULL,
   `forth_ins_invoice` int(11) DEFAULT NULL,
   `phone_second` varchar(100) DEFAULT NULL,
+  `number` int(11) DEFAULT NULL,
   KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `students` */
+
+insert  into `students`(`id`,`state_id`,`name`,`school`,`branch`,`governorate`,`institute`,`phone`,`poster`,`code`,`identification`,`total_amount`,`first_installment`,`second_installment`,`third_installment`,`forth_installment`,`remain_amount`,`notes`,`created_at`,`first_ins_date`,`first_ins_invoice`,`second_ins_date`,`second_ins_invoice`,`third_ins_date`,`third_ins_invoice`,`forth_ins_date`,`forth_ins_invoice`,`phone_second`,`number`) values 
+(4,1,'student_1in _state1','aswerwerdfasdf','Applied','asdfasdf','asdfasfd','121234123','Gold Poster','','',0,0,0,0,0,0,'','2021-06-22','2021-06-22',0,'2021-06-22',0,'2021-06-22',0,'2021-06-22',0,'',1),
+(5,1,'fasdfasfd','asdfasdf','Biological','dfas','asfdasfd','','','','',0,0,0,0,0,0,'','2021-06-22','2021-06-22',0,'2021-06-22',0,'2021-06-22',0,'2021-06-22',0,'',1),
+(6,2,'asdfasdf','asdfas','Applied','asdfasdf','','','','','',0,0,0,0,0,0,'','2021-06-22','2021-06-22',0,'2021-06-22',0,'2021-06-22',0,'2021-06-22',0,'',1),
+(7,2,'asdfasfd','asdfasdd','Applied','asdfasdf','asdf','','','','',123,23,0,0,0,100,'','2021-06-22','2021-06-22',0,'2021-06-22',0,'2021-06-22',0,'2021-06-22',0,'',1);
 
 /*Table structure for table `user` */
 

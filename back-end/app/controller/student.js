@@ -21,7 +21,6 @@ let createStudent = async (req, res) => {
         const data = req.body;
         const studentexist = await student_model.getStudentByName(data.name);
         if (studentexist) return res.status(400).json({ message: 'Already exist student with that name.' });
-        console.log("studentexist", studentexist);
         const state = await state_model.findStatesByIds([data.stateId]);
         if (!state) return res.status(400).json({
             message: 'There is no state for that.'
@@ -47,6 +46,12 @@ let createStudent = async (req, res) => {
         }
         if (data.forth_ins_date == '') {
             data.forth_ins_date = created_at;
+        }
+        let number = 1;
+        //add number in each student instate.
+        let lastStudent = await student_model.getStudnetByStateId(data.stateId);
+        if (lastStudent) {
+            number = lastStudent.number + 1;
         }
         let student= await student_model.createStudent(
             {
@@ -76,6 +81,7 @@ let createStudent = async (req, res) => {
                 forth_ins_invoice: data.forth_ins_invoice,
                 remain_amount: data.remaining,
                 notes: data.notes,
+                number,
                 created_at
             }
         );
@@ -205,7 +211,8 @@ let updateStudent = async (req, res) => {
         forth_ins_date: data.forth_ins_date,
         forth_ins_invoice: data.forth_ins_invoice,
         total_amount: data.totalAmount,
-        remain_amount: data.remaining
+        remain_amount: data.remaining,
+        number: data.number
     };
 
     await student_model.updateStudent(modifiedData);

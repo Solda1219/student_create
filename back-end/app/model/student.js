@@ -40,7 +40,7 @@ let getStudentsByStateIds = async (stateIds) => {
 let getStudentByName = async (nameData) => {
 
         const item = await query.get(studenttable, '*', `WHERE name ='${nameData}'`);
-        console.log(item);
+
         if (item.length > 0) {
             return item[0];
         }
@@ -48,6 +48,20 @@ let getStudentByName = async (nameData) => {
             return false;
         }
 
+}
+
+let getStudnetByStateId = async (stateId) => {
+    try {
+        const students = await query.get(studenttable, '*', `WHERE state_id=${stateId}`);
+        if (students > 0) {
+            return students[students.length - 1];
+        } else {
+            return false;
+        }
+    }
+    catch (err) {
+        return false;
+    }
 }
 
 let getStudentsByIds = async (ids) => {
@@ -81,9 +95,7 @@ let updateStudent = async (data) => {
     try {
         const { id } = data;
         delete data.id;
-        console.log("heredata?", data);
         const update = await query.update(studenttable, data, `WHERE id=${id}`);
-        console.log("here update?", update);
         return true
     }
     catch (err) {
@@ -123,5 +135,6 @@ module.exports = {
     getAllStudent,
     getStudentsByStateIds,
     deleteStudentsByStateId,
-    getStudentByName
+    getStudentByName,
+    getStudnetByStateId
 }
