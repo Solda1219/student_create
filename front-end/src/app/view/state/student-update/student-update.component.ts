@@ -56,7 +56,7 @@ export class StudentUpdateComponent implements OnInit {
           forth_ins_invoice: [this.studentData['forth_ins_invoice']],
           remaining: [this.studentData['remain_amount']],
           totalAmount: [this.studentData['total_amount']],
-          number: [this.studentData['number'], Validators.required]
+          number: [this.studentData['number']]
         });
         
       },
@@ -95,7 +95,7 @@ export class StudentUpdateComponent implements OnInit {
       forth_ins_invoice: [this.studentData['forth_ins_invoice']],
       remaining: [this.studentData['remain_amount']],
       totalAmount: [this.studentData['total_amount']],
-      number: [this.studentData['number'], Validators.required]
+      number: [this.studentData['number']]
     });
     
     this.loading = true;
